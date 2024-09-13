@@ -17,10 +17,20 @@ import { E164Number } from "libphonenumber-js/core";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
+import {
+  Select as CustomSelect, // Renamed to avoid conflict
+  SelectContent,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 import { Textarea } from "./ui/textarea";
 import { Checkbox } from "./ui/checkbox";
+import ReactSelect, { MultiValue } from "react-select"; // Renamed to ReactSelect
 
+interface SelectOption {
+  label: string | JSX.Element;
+  value: string;
+}
 interface CustomProps {
   control: Control<any>;
   fieldType: FormFieldType;
@@ -34,6 +44,7 @@ interface CustomProps {
   dateFormat?: string;
   showTimeSelect?: boolean;
   children?: React.ReactNode;
+  options?: SelectOption[];
   renderSkeleton?: (field: any) => React.ReactNode;
 }
 
@@ -47,6 +58,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     showTimeSelect,
     dateFormat,
     renderSkeleton,
+    options
   } = props;
 
   switch (fieldType) {
@@ -87,7 +99,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
       return (
         <FormControl>
           <PhoneInput
-            defaultCountry="US"
+            defaultCountry="GH"
             placeholder={props.placeholder}
             international
             withCountryCallingCode
@@ -104,7 +116,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             src="/assets/icons/calendar.svg"
             height={24}
             width={24}
-            alt="calender"
+            alt="calendar"
             className="ml-2"
           />
           <FormControl>
@@ -115,7 +127,6 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               showTimeSelect={showTimeSelect ?? false}
               timeInputLabel="Time:"
               wrapperClassName="date-picker"
-
             />
           </FormControl>
         </div>
@@ -125,16 +136,61 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     case FormFieldType.SELECT:
       return (
         <FormControl>
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <CustomSelect onValueChange={field.onChange} defaultValue={field.value}>
             <FormControl>
               <SelectTrigger className="shad-select-trigger">
                 <SelectValue placeholder={props.placeholder} />
               </SelectTrigger>
             </FormControl>
-            <SelectContent>
-              {props.children}
-            </SelectContent>
-          </Select>
+            <SelectContent>{props.children}</SelectContent>
+          </CustomSelect>
+        </FormControl>
+      );
+    case FormFieldType.SELECTSEARCH:
+      return (
+        <FormControl>
+          <ReactSelect
+            value={field.value ? { label: field.value, value: field.value } : null}
+            onChange={(selectedOption) => field.onChange(selectedOption?.value)}
+            options={props.options}
+            placeholder={props.placeholder}
+            isSearchable
+            styles={{
+              control: (base, state) => ({
+                ...base,
+                borderColor: state.isFocused ? 'none' : base.borderColor,
+                boxShadow: 'none',
+                '&:hover': {
+                  borderColor: 'none',
+                },
+              }),
+            }}
+          />
+        </FormControl>
+      );
+    case FormFieldType.MULTI_SELECT:
+      return (
+        <FormControl>
+          <ReactSelect
+            isMulti
+            value={field.value}
+            onChange={(selectedOptions: MultiValue<SelectOption>) =>
+              field.onChange(selectedOptions)
+            }
+            options={options as SelectOption[]}
+            classNamePrefix="react-select"
+            placeholder={props.placeholder}
+            styles={{
+              control: (base, state) => ({
+                ...base,
+                borderColor: state.isFocused ? 'none' : base.borderColor,
+                boxShadow: 'none',
+                '&:hover': {
+                  borderColor: 'none',
+                },
+              }),
+            }}
+          />
         </FormControl>
       );
     case FormFieldType.CHECKBOX:
@@ -153,7 +209,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
         </FormControl>
       );
     default:
-      break;
+      return null;
   }
 };
 

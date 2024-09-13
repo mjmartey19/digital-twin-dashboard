@@ -20,6 +20,8 @@ export enum FormFieldType {
   CHECKBOX = "checkbox",
   DATE_PICKER = "datePicker",
   SELECT = "select",
+  SELECTSEARCH = "selectSearch",
+  MULTI_SELECT = 'multiSelect',
   SKELETON = "skeleton",
 }
 

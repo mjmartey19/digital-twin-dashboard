@@ -8,21 +8,69 @@ import { Form, FormControl } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 import { SelectItem } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState, useTransition } from "react";
 import { Plus } from "lucide-react";
 import CustomFormField from "./CustomFormField";
 import { FormFieldType } from "./forms/LoginForm";
-import { FuelTypes, VehicleTypes, VehicleStatus, Drivers, Janitors } from "@/constants";
+import {
+  FuelTypes,
+  VehicleTypes,
+  VehicleStatus,
+  Drivers,
+  Janitors,
+} from "@/constants";
 import { VehicleSchema } from "@/lib/validation";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-
 
 export function AddVehicleDialog() {
   const [open, setOpen] = useState(false);
   const [isAddVehiclePending, addVehicleTransition] = useTransition();
+
+  const janitorOptions = Janitors.map((janitor) => ({
+    value: janitor.name,
+    label: (
+      <div className="flex items-center gap-2">
+        <Image
+          src={janitor.image}
+          width={32}
+          height={32}
+          alt={janitor.name}
+          className="rounded-full"
+        />
+        <span>{janitor.name}</span>
+      </div>
+    ),
+  }));
+
+  const driverOptions = Drivers.map((driver) => ({
+    value: driver.name,
+    label: (
+      <div className="flex items-center gap-2">
+        <Image
+          src={driver.image}
+          width={32}
+          height={32}
+          alt={driver.name}
+          className="rounded-full"
+        />
+        <span>{driver.name}</span>
+      </div>
+    ),
+  }));
+
+
 
   const form = useForm<z.infer<typeof VehicleSchema>>({
     resolver: zodResolver(VehicleSchema),
@@ -37,7 +85,7 @@ export function AddVehicleDialog() {
       registrationDate: new Date(),
       vehicleStatus: "",
       assignedDriver: "",
-      assignedJanitors: "",
+      assignedJanitors: [],
     },
   });
 
@@ -55,12 +103,15 @@ export function AddVehicleDialog() {
         <Button size="sm" className="sm:hidden bg-green-500">
           <Plus className="h-4 w-4" />
         </Button>
-        <Button size="sm" className="hidden sm:flex bg-green-500 hover:bg-green-400">
+        <Button
+          size="sm"
+          className="hidden sm:flex bg-green-500 hover:bg-green-400"
+        >
           <Plus className="mr-2 h-4 w-4" /> Add Vehicle
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[100vh] overflow-y-auto max-w-4xl">
-        <ScrollArea >
+        <ScrollArea>
           <DialogHeader>
             <DialogTitle>Add Vehicle</DialogTitle>
             <DialogDescription>
@@ -69,7 +120,11 @@ export function AddVehicleDialog() {
           </DialogHeader>
 
           <Form {...form}>
-            <form noValidate onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-8">
+            <form
+              noValidate
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="flex-1 space-y-8"
+            >
               <section className="space-y-6">
                 <div className="flex flex-col gap-6 xl:flex-row">
                   <CustomFormField
@@ -157,49 +212,22 @@ export function AddVehicleDialog() {
               <section className="space-y-6">
                 <div className="flex flex-col gap-6 xl:flex-row">
                   <CustomFormField
-                    fieldType={FormFieldType.SELECT}
+                    fieldType={FormFieldType.SELECTSEARCH}
                     control={form.control}
                     name="assignedDriver"
                     label="Assigned Driver"
                     placeholder="Select a driver"
-                  >
-                    {Drivers.map((driver, i) => (
-                      <SelectItem key={driver.name + i} value={driver.name}>
-                        <div className="flex cursor-pointer items-center gap-2">
-                          <Image
-                            src={driver.image}
-                            width={32}
-                            height={32}
-                            alt="driver"
-                            className="rounded-full"
-                          />
-                          <p>{driver.name}</p>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </CustomFormField>
+                    options={driverOptions}
+                  />
                   <CustomFormField
-                    fieldType={FormFieldType.SELECT}
+                    fieldType={FormFieldType.MULTI_SELECT}
                     control={form.control}
                     name="assignedJanitors"
                     label="Assigned Janitors"
-                    placeholder="Select a Janitor"
-                  >
-                    {Janitors.map((janitor, i) => (
-                      <SelectItem key={janitor.name + i} value={janitor.name}>
-                        <div className="flex cursor-pointer items-center gap-2">
-                          <Image
-                            src={janitor.image}
-                            width={32}
-                            height={32}
-                            alt="janitor"
-                            className="rounded-full border border-dark-500"
-                          />
-                          <p>{janitor.name}</p>
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </CustomFormField>
+                    placeholder="Select Janitors"
+                    options={janitorOptions}
+                  />
+
                 </div>
               </section>
 
@@ -209,7 +237,10 @@ export function AddVehicleDialog() {
                     Close
                   </Button>
                 </DialogClose>
-                <Button type="submit" className="bg-green-500 hover:bg-green-400">
+                <Button
+                  type="submit"
+                  className="bg-green-500 hover:bg-green-400"
+                >
                   {isAddVehiclePending && (
                     <ReloadIcon
                       className="mr-2 h-4 w-4 animate-spin"
@@ -225,6 +256,5 @@ export function AddVehicleDialog() {
         </ScrollArea>
       </DialogContent>
     </Dialog>
-
   );
 }
