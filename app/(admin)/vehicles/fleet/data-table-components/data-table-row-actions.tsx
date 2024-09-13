@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { EditVehicleDialog } from "@/components/edit-vehicle-dialog";
 
-
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
 }
@@ -25,16 +24,52 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
     setIsDialogOpen(true);
   };
 
-  const handleCopy = () => {
-    console.log("Make a copy", row.original);
-  };
-
-  const handleFavorite = () => {
-    console.log("Favorite", row.original);
-  };
-
   const handleDelete = () => {
     console.log("Delete", row.original);
+  };
+
+  const handleMaintenance = () => {
+    console.log("Maintenance", row.original);
+  };
+
+  const handleFuelPurchase = () => {
+    console.log("Fuel Purchase", row.original);
+  };
+
+  const handleFuelConsumed = () => {
+    console.log("Fuel Consumed", row.original);
+  };
+
+  const handleDepreciation = () => {
+    console.log("Depreciation", row.original);
+  };
+
+  const handleInsuranceRecord = () => {
+    console.log("Insurance Record", row.original);
+  };
+
+  const handleInsuranceClaim = () => {
+    console.log("Insurance Claim", row.original);
+  };
+
+  const handleLicensingCost = () => {
+    console.log("Licensing Cost", row.original);
+  };
+
+  const handleWasteBinsCollected = () => {
+    console.log("Waste Bins Collected", row.original);
+  };
+
+  const handleWasteDumpingFee = () => {
+    console.log("Waste Dumping Fee", row.original);
+  };
+
+  const handleWasteRevenue = () => {
+    console.log("Waste Revenue", row.original);
+  };
+
+  const handleRouteInformation = () => {
+    console.log("Route Information", row.original);
   };
 
   return (
@@ -51,8 +86,17 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
           <DropdownMenuItem onClick={handleEdit}>Edit</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleCopy}>Make a copy</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleFavorite}>Favorite</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleMaintenance}>Maintenance</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleFuelPurchase}>Fuel Purchase</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleFuelConsumed}>Fuel Consumed</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleDepreciation}>Depreciation</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleInsuranceRecord}>Insurance Record</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleInsuranceClaim}>Insurance Claim</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleLicensingCost}>Licensing Cost</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleWasteBinsCollected}>Waste Bins Collected</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleWasteDumpingFee}>Waste Dumping Fee</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleWasteRevenue}>Waste Revenue</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleRouteInformation}>Route Information</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
         </DropdownMenuContent>
