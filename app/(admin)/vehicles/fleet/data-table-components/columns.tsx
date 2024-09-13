@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "./data-table-column-header";
-
+import { DataTableRowActions } from "./data-table-row-actions";
 export const columns: ColumnDef<any>[] = [
   {
     id: "select",
@@ -34,26 +34,38 @@ export const columns: ColumnDef<any>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="VIN" />
     ),
+    cell: ({ row }) => <div className="w-[200px]">{row.getValue("vin")}</div>,
+  },
+  {
+    accessorKey: "vehicleNumberPlate",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Number Plate" />
+    ),
     cell: ({ row }) => (
-      <div className="w-[200px]">{row.getValue("vin")}</div>
+      <div className="w-[120px]">{row.getValue("vehicleNumberPlate")}</div>
     ),
   },
   {
-    accessorKey: "plateNumber",
+    accessorKey: "make",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Plate Number" />
+      <DataTableColumnHeader column={column} title="Make" />
     ),
-    cell: ({ row }) => (
-      <div className="w-[120px]">{row.getValue("plateNumber")}</div>
-    ),
+    cell: ({ row }) => <div className="w-[120px]">{row.getValue("make")}</div>,
   },
   {
-    accessorKey: "vehicleType",
+    accessorKey: "model",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Vehicle Type" />
+      <DataTableColumnHeader column={column} title="Model" />
+    ),
+    cell: ({ row }) => <div className="w-[120px]">{row.getValue("model")}</div>,
+  },
+  {
+    accessorKey: "yearOfManufacture",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Year" />
     ),
     cell: ({ row }) => (
-      <div className="w-[120px] capitalize">{row.getValue("vehicleType")}</div>
+      <div className="w-[100px]">{row.getValue("yearOfManufacture")}</div>
     ),
   },
   {
@@ -66,30 +78,69 @@ export const columns: ColumnDef<any>[] = [
     ),
   },
   {
-    accessorKey: "status",
+    accessorKey: "typeOfVehicle",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Vehicle Type" />
+    ),
+    cell: ({ row }) => (
+      <div className="w-[120px] capitalize">{row.getValue("typeOfVehicle")}</div>
+    ),
+  },
+  {
+    accessorKey: "vehicleStatus",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => (
       <div
-        className={`w-[120px] ${row.getValue("status") === "Active"
-          ? "text-green-600"
-          : row.getValue("status") === "Inactive"
-            ? "text-red-600"
-            : "text-yellow-600"
+        className={`w-fit px-4 py-1 rounded-sm ${row.getValue("vehicleStatus") === "En Route"
+          ? "bg-green-200 text-green-500"
+          : row.getValue("vehicleStatus") === "Available"
+            ? "bg-blue-200 text-blue-500"
+            : row.getValue("vehicleStatus") === "Out of Service"
+              ? "bg-red-200 text-red-500"
+              : "bg-yellow-200 text-yellow-500"
+
           } capitalize`}
       >
-        {row.getValue("status")}
+        {row.getValue("vehicleStatus")}
       </div>
     ),
   },
   {
-    accessorKey: "assignedPersonnel",
+    accessorKey: "assignedDriver",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Assigned Personnel" />
+      <DataTableColumnHeader column={column} title="Assigned Driver" />
     ),
-    cell: ({ row }) => (
-      <div className="w-[200px]">{row.getValue("assignedPersonnel")}</div>
+    cell: ({ row }) => <div className="w-[150px]">{row.getValue("assignedDriver")}</div>,
+  },
+  {
+    accessorKey: "assignedJanitors",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Assigned Janitors" />
     ),
+    cell: ({ row }) => {
+      const janitors = row.getValue("assignedJanitors") as string[];
+      return (
+        <div className="w-fit space-y-1 flex gap-1 flex-wrap">
+          {janitors.map((janitor: string, index: number) => (
+            <div
+              key={index}
+              className="px-2 py-1 text-gray-800 rounded-md border border-dotted border-dark-500"
+            >
+              {janitor}
+            </div>
+          ))}
+        </div>
+      );
+    },
+  },
+
+  {
+    id: "actions",
+    header: "Actions",
+    cell: ({ row }) => <DataTableRowActions row={row} />,
+    enableSorting: false,
+    enableHiding: false,
   },
 ];

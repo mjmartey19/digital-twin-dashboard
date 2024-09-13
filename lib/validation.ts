@@ -13,70 +13,20 @@ export const LoginFormValidation = z.object({
 });
 
 
-export const PatientFormValidation = z.object({
-  name: z
-    .string()
-    .min(2, "Name must be at least 2 characters")
-    .max(50, "Name must be at most 50 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z
-    .string()
-    .refine((phone) => /^\+\d{10,15}$/.test(phone), "Invalid phone number"),
-  birthDate: z.coerce.date(),
-  gender: z.enum(["male", "female", "other"]),
-  address: z
-    .string()
-    .min(5, "Address must be at least 5 characters")
-    .max(500, "Address must be at most 500 characters"),
-  occupation: z
-    .string()
-    .min(2, "Occupation must be at least 2 characters")
-    .max(500, "Occupation must be at most 500 characters"),
-  emergencyContactName: z
-    .string()
-    .min(2, "Contact name must be at least 2 characters")
-    .max(50, "Contact name must be at most 50 characters"),
-  emergencyContactNumber: z
-    .string()
-    .refine(
-      (emergencyContactNumber) => /^\+\d{10,15}$/.test(emergencyContactNumber),
-      "Invalid phone number"
-    ),
-  primaryPhysician: z.string().min(2, "Select at least one doctor"),
-  insuranceProvider: z
-    .string()
-    .min(2, "Insurance name must be at least 2 characters")
-    .max(50, "Insurance name must be at most 50 characters"),
-  insurancePolicyNumber: z
-    .string()
-    .min(2, "Policy number must be at least 2 characters")
-    .max(50, "Policy number must be at most 50 characters"),
-  allergies: z.string().optional(),
-  currentMedication: z.string().optional(),
-  familyMedicalHistory: z.string().optional(),
-  pastMedicalHistory: z.string().optional(),
-  identificationType: z.string().optional(),
-  identificationNumber: z.string().optional(),
-  identificationDocument: z.custom<File[]>().optional(),
-  treatmentConsent: z
-    .boolean()
-    .default(false)
-    .refine((value) => value === true, {
-      message: "You must consent to treatment in order to proceed",
-    }),
-  disclosureConsent: z
-    .boolean()
-    .default(false)
-    .refine((value) => value === true, {
-      message: "You must consent to disclosure in order to proceed",
-    }),
-  privacyConsent: z
-    .boolean()
-    .default(false)
-    .refine((value) => value === true, {
-      message: "You must consent to privacy in order to proceed",
-    }),
+export const VehicleSchema = z.object({
+  vin: z.string().min(1, "VIN is required").max(255, "VIN must be less than 255 characters"),
+  vehicleNumberPlate: z.string().min(1, "Vehicle number plate is required").max(255, "Vehicle number plate must be less than 255 characters"),
+  make: z.string().min(1, "Make is required").max(255, "Make must be less than 255 characters"),
+  model: z.string().min(1, "Model is required").max(255, "Model must be less than 255 characters"),
+  yearOfManufacture: z.string().length(4, "Year of manufacture must be 4 digits"),
+  fuelType: z.string().min(1, "Fuel type is required").max(255, "Fuel type must be less than 255 characters"),
+  typeOfVehicle: z.string().min(1, "Vehicle type is required").max(255, "Vehicle type must be less than 255 characters"),
+  registrationDate: z.date().optional(), 
+  vehicleStatus: z.string().min(1, "Vehicle status is required").max(255, "Vehicle status must be less than 255 characters"),
+  assignedDriver: z.string().optional(),
+  assignedJanitors: z.string().optional(),
 });
+
 
 export const CreateAppointmentSchema = z.object({
   primaryPhysician: z.string().min(2, "Select at least one doctor"),

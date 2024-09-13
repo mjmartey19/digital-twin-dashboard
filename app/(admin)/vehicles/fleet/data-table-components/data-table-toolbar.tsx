@@ -1,13 +1,11 @@
 "use client";
 
 import { Table } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
 import { DataTableViewOptions } from "./data-table-view-options";
-import { TrashIcon } from "lucide-react";
-import { AddTaskDialog } from "@/components/add-task-dialog";
-import { DeleteTaskDialog } from "@/components/delete-tasks-dialog";
+
+import { AddVehicleDialog } from "@/components/add-vehicle-dialog";
+import { DeleteVehicleDialog } from "@/components/delete-vehicle-dialog";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -31,15 +29,15 @@ export function DataTableToolbar<TData>({
 
       <div className="flex items-center gap-2">
         {table.getFilteredSelectedRowModel().rows.length > 0 ? (
-          <DeleteTaskDialog
-            tasks={table
+          <DeleteVehicleDialog
+            vehicles={table
               .getFilteredSelectedRowModel()
               .rows.map((row) => row.original as any)}
             onSuccess={() => table.toggleAllRowsSelected(false)}
           />
         ) : null}
 
-        <AddTaskDialog />
+        <AddVehicleDialog />
         <DataTableViewOptions table={table} />
       </div>
     </div>

@@ -131,7 +131,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                 <SelectValue placeholder={props.placeholder} />
               </SelectTrigger>
             </FormControl>
-            <SelectContent className="shad-select-content">
+            <SelectContent>
               {props.children}
             </SelectContent>
           </Select>
@@ -166,7 +166,7 @@ const CustomFormField = (props: CustomProps) => {
       render={({ field }) => (
         <FormItem className="flex-1">
           {fieldType !== FormFieldType.CHECKBOX && label && (
-            <FormLabel>{label}</FormLabel>
+            <FormLabel className="text-black">{label}</FormLabel>
           )}
           <RenderField field={field} props={props} />
           <FormMessage className="shad-error" />
