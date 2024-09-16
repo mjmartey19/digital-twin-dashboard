@@ -10,16 +10,11 @@ import { SelectItem } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { ReloadIcon } from "@radix-ui/react-icons";
+
 import { useState, useTransition } from "react";
 import { Plus } from "lucide-react";
 import CustomFormField from "./CustomFormField";
@@ -27,12 +22,13 @@ import { FormFieldType } from "./forms/LoginForm";
 import {
   FuelTypes,
   VehicleTypes,
-  VehicleStatus,
   Drivers,
   Janitors,
 } from "@/constants";
 import { VehicleSchema } from "@/lib/validation";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { CustomDialogHeader } from "./CustomDialogHeader";
+import { CustomDialogFooter } from "./CustomDialogFooter";
 
 export function AddVehicleDialog() {
   const [open, setOpen] = useState(false);
@@ -112,18 +108,16 @@ export function AddVehicleDialog() {
       </DialogTrigger>
       <DialogContent className="max-h-[100vh] overflow-y-auto max-w-4xl">
         <ScrollArea>
-          <DialogHeader>
-            <DialogTitle>Add Vehicle</DialogTitle>
-            <DialogDescription>
-              Fill in the details below to register a new vehicle.
-            </DialogDescription>
-          </DialogHeader>
+          <CustomDialogHeader
+            title="Add Vehicle"
+            description="Fill in the details below to register a new vehicle."
+          />
 
           <Form {...form}>
             <form
               noValidate
               onSubmit={form.handleSubmit(onSubmit)}
-              className="flex-1 space-y-8"
+              className="flex-1 space-y-8 pt-5"
             >
               <section className="space-y-6">
                 <div className="flex flex-col gap-6 xl:flex-row">
@@ -231,25 +225,13 @@ export function AddVehicleDialog() {
                 </div>
               </section>
 
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button type="button" variant="secondary">
-                    Close
-                  </Button>
-                </DialogClose>
-                <Button
-                  type="submit"
-                  className="bg-green-500 hover:bg-green-400"
-                >
-                  {isAddVehiclePending && (
-                    <ReloadIcon
-                      className="mr-2 h-4 w-4 animate-spin"
-                      aria-hidden="true"
-                    />
-                  )}
-                  Add Vehicle
-                </Button>
-              </DialogFooter>
+              <CustomDialogFooter
+                isPending={isAddVehiclePending}
+                onClose={() => setOpen(false)}
+                onSubmit={form.handleSubmit(onSubmit)}
+                submitLabel="Add Vehicle" // Dynamic submit label
+                closeLabel="Cancel" // Dynamic close label
+              />
             </form>
           </Form>
           <ScrollBar orientation="vertical" />

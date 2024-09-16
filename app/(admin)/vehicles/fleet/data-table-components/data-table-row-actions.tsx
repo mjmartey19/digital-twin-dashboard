@@ -10,22 +10,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { EditVehicleDialog } from "@/components/edit-vehicle-dialog";
+import { DeleteVehicleDialog } from "@/components/delete-vehicle-dialog";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
 }
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
-  // State to track if the dialog is open
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
-  // Handle Edit button click
   const handleEdit = () => {
-    setIsDialogOpen(true);
+    setIsEditDialogOpen(true);
   };
 
   const handleDelete = () => {
-    console.log("Delete", row.original);
+    setIsDeleteDialogOpen(true);
   };
 
   const handleMaintenance = () => {
@@ -84,29 +84,49 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
             <span className="sr-only">Open menu</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[160px]">
+        <DropdownMenuContent align="start" className="w-[200px] max-h-[400px] overflow-y-auto">
           <DropdownMenuItem onClick={handleEdit}>Edit</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleMaintenance}>Maintenance</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleFuelPurchase}>Fuel Purchase</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleFuelConsumed}>Fuel Consumed</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleDepreciation}>Depreciation</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleInsuranceRecord}>Insurance Record</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleInsuranceClaim}>Insurance Claim</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleLicensingCost}>Licensing Cost</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleWasteBinsCollected}>Waste Bins Collected</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleWasteDumpingFee}>Waste Dumping Fee</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleWasteRevenue}>Waste Revenue</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleRouteInformation}>Route Information</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleMaintenance}>Maintenance</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleFuelPurchase}>Fuel Purchase</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleFuelConsumed}>Fuel Consumed</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleDepreciation}>Depreciation</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleInsuranceRecord}>Insurance Record</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleInsuranceClaim}>Insurance Claim</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleLicensingCost}>Licensing Cost</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleWasteBinsCollected}>Waste Bins Collected</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleWasteDumpingFee}>Waste Dumping Fee</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleWasteRevenue}>Waste Revenue</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleRouteInformation}>Route Information</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
       {/* Render the EditVehicleDialog and pass the row data */}
       <EditVehicleDialog
         vehicle={row.original}
-        open={isDialogOpen}
-        onOpenChange={setIsDialogOpen}
+        open={isEditDialogOpen}
+        onOpenChange={setIsEditDialogOpen}
+      />
+
+      {/* Render the DeleteVehicleDialog */}
+      <DeleteVehicleDialog
+        vehicles={[row.original]} // Pass the selected vehicle
+        open={isDeleteDialogOpen}
+        showTrigger={false}
+        onOpenChange={setIsDeleteDialogOpen}
+
       />
     </>
   );

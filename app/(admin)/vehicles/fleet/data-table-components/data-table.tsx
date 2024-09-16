@@ -65,9 +65,9 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="space-y-4 w-full max-w-[1000px] flex flex-col">
+    <div className="space-y-4 w-full flex flex-col">
       <DataTableToolbar table={table} />
-      <div className="rounded-md border">
+      <div className="rounded-md border max-w-full">
         <ScrollArea>
           <Table>
             <TableHeader>
@@ -104,6 +104,7 @@ export function DataTable<TData, TValue>({
             </TableBody>
           </Table>
           <ScrollBar orientation="horizontal" />
+          <ScrollBar orientation="vertical" />
         </ScrollArea>
       </div>
       <DataTablePagination table={table} />

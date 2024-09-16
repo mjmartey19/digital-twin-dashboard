@@ -4,33 +4,29 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form, FormControl } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
+import { Form } from "@/components/ui/form";
+
 import { SelectItem } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
+
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { ReloadIcon } from "@radix-ui/react-icons";
-import { useState, useTransition } from "react";
-import { Plus } from "lucide-react";
+import { useTransition } from "react";
+
 import CustomFormField from "./CustomFormField";
 import { FormFieldType } from "./forms/LoginForm";
-import { FuelTypes, VehicleTypes, VehicleStatus, Drivers, Janitors } from "@/constants";
-import { VehicleSchema } from "@/lib/validation"; // Update with the correct validation schema for Edit
+import { FuelTypes, VehicleTypes, Drivers, Janitors } from "@/constants";
+import { VehicleSchema } from "@/lib/validation";
+import { CustomDialogHeader } from "./CustomDialogHeader";
+import { CustomDialogFooter } from "./CustomDialogFooter";
 
 interface EditVehicleDialogProps {
   vehicle: any;
   open: boolean;
-  onOpenChange: (open: boolean) => void; // Prop to control dialog visibility
+  onOpenChange: (open: boolean) => void;
 }
 
 export function EditVehicleDialog({ vehicle, open, onOpenChange }: EditVehicleDialogProps) {
@@ -66,12 +62,11 @@ export function EditVehicleDialog({ vehicle, open, onOpenChange }: EditVehicleDi
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[100vh] overflow-y-auto max-w-4xl">
-        <DialogHeader>
-          <DialogTitle>Edit Vehicle</DialogTitle>
-          <DialogDescription>
-            Modify the details below to update the vehicle.
-          </DialogDescription>
-        </DialogHeader>
+        <CustomDialogHeader
+          title="Edit Vehicle"
+          description="Modify the details below to update the vehicle."
+        />
+
 
         <Form {...form}>
           <form
@@ -212,22 +207,13 @@ export function EditVehicleDialog({ vehicle, open, onOpenChange }: EditVehicleDi
               </div>
             </section>
 
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button type="button" variant="secondary">
-                  Close
-                </Button>
-              </DialogClose>
-              <Button type="submit" className="bg-blue-500 hover:bg-blue-400">
-                {isEditVehiclePending && (
-                  <ReloadIcon
-                    className="mr-2 h-4 w-4 animate-spin"
-                    aria-hidden="true"
-                  />
-                )}
-                Update Vehicle
-              </Button>
-            </DialogFooter>
+            <CustomDialogFooter
+              isPending={isEditVehiclePending}
+              onClose={() => onOpenChange(false)}
+              onSubmit={form.handleSubmit(onSubmit)}
+              submitLabel="Edit Vehicle"
+              closeLabel="Cancel"
+            />
           </form>
         </Form>
       </DialogContent>

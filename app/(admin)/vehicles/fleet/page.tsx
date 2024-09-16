@@ -6,10 +6,9 @@ import { ContentLayout } from "@/components/admin-panel/content-layout";
 
 export default async function FleetPage() {
   const data = vehiclesData;
-  // console.log(data);
   return (
     <ContentLayout title="Vehicle">
-      <div className="pb-2 pt-3">
+      <div className="pb-2 pt-20">
         <DataTable data={data} columns={columns} />
       </div>
     </ContentLayout>
