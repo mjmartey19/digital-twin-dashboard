@@ -9,8 +9,12 @@ export const vehiclesData = [
     typeOfVehicle: "Truck",
     registrationDate: "2020-03-15",
     vehicleStatus: "En Route",
-    assignedDriver: "John Doe",
-    assignedJanitors: ["Jane Smith"],
+    assignedDriver: { id: "d1", image: "/assets/images/dr-livingston.png", name: "David Little" },
+    assignedJanitors: [
+      { id: "j1", name: "David Clark", image: "/assets/images/dr-livingston.png" },
+      { id: "j2", name: "Elliot Lassey", image: "/assets/images/dr-cameron.png" },
+      { id: "j3", name: "Edward Danquah", image: "/assets/images/dr-cruz.png" },
+    ],
   },
   {
     vin: "2FDKF37M3PCA12345",
@@ -22,8 +26,11 @@ export const vehiclesData = [
     typeOfVehicle: "Truck",
     registrationDate: "2016-08-20",
     vehicleStatus: "Available",
-    assignedDriver: "Michael Brown",
-    assignedJanitors: ["David Clark", "Elliot Lassey", "Edward Danquah"],
+    assignedDriver: { id: "d1", name: "Michael Brown", image: "/assets/images/dr-peter.png" },
+    assignedJanitors: [
+      { id: "j1", name: "David Clark", image: "/assets/images/dr-lee.png" },
+      { id: "j2", name: "Elliot Lassey", image: "/assets/images/dr-peter.png" },
+    ],
   },
   {
     vin: "JM1FE17N450123456",
@@ -35,8 +42,10 @@ export const vehiclesData = [
     typeOfVehicle: "Tricycle",
     registrationDate: "2005-05-10",
     vehicleStatus: "Out of Service",
-    assignedDriver: "Alice Johnson",
-    assignedJanitors: ["Emily Davis"],
+    assignedDriver: { id: "d3", image: "/assets/images/dr-cameron.png", name: "Lydia Kai" },
+    assignedJanitors: [
+      { id: "j4", name: "Emily Davis", image: "/assets/images/dr-remirez.png" },
+    ],
   },
   {
     vin: "JH4KA9650MC123456",
@@ -48,103 +57,13 @@ export const vehiclesData = [
     typeOfVehicle: "Truck",
     registrationDate: "2011-12-05",
     vehicleStatus: "In Maintenance",
-    assignedDriver: "Robert Miller",
-    assignedJanitors: ["Sarah Wilson"],
+    assignedDriver:   { id: "d4", image: "/assets/images/dr-green.png", name: "Elliot Green" },
+    assignedJanitors: [
+      { id: "j5", name: "Sarah Wilson", image: "/assets/images/dr-cruz.png" },
+    ],
   },
-    {
-    vin: "JH4KA9650MC123456",
-    vehicleNumberPlate: "MN012OP",
-    make: "Honda",
-    model: "Civic",
-    yearOfManufacture: "2010",
-    fuelType: "Diesel",
-    typeOfVehicle: "Truck",
-    registrationDate: "2011-12-05",
-    vehicleStatus: "In Maintenance",
-    assignedDriver: "Robert Miller",
-    assignedJanitors: ["Sarah Wilson"],
-  },
-      {
-    vin: "JH4KA9650MC123456",
-    vehicleNumberPlate: "MN012OP",
-    make: "Honda",
-    model: "Civic",
-    yearOfManufacture: "2010",
-    fuelType: "Diesel",
-    typeOfVehicle: "Truck",
-    registrationDate: "2011-12-05",
-    vehicleStatus: "In Maintenance",
-    assignedDriver: "Robert Miller",
-    assignedJanitors: ["Sarah Wilson"],
-  },
-        {
-    vin: "JH4KA9650MC123456",
-    vehicleNumberPlate: "MN012OP",
-    make: "Honda",
-    model: "Civic",
-    yearOfManufacture: "2010",
-    fuelType: "Diesel",
-    typeOfVehicle: "Truck",
-    registrationDate: "2011-12-05",
-    vehicleStatus: "In Maintenance",
-    assignedDriver: "Robert Miller",
-    assignedJanitors: ["Sarah Wilson"],
-  },
-          {
-    vin: "JH4KA9650MC123456",
-    vehicleNumberPlate: "MN012OP",
-    make: "Honda",
-    model: "Civic",
-    yearOfManufacture: "2010",
-    fuelType: "Diesel",
-    typeOfVehicle: "Truck",
-    registrationDate: "2011-12-05",
-    vehicleStatus: "In Maintenance",
-    assignedDriver: "Robert Miller",
-    assignedJanitors: ["Sarah Wilson"],
-  },
-            {
-    vin: "JH4KA9650MC123456",
-    vehicleNumberPlate: "MN012OP",
-    make: "Honda",
-    model: "Civic",
-    yearOfManufacture: "2010",
-    fuelType: "Diesel",
-    typeOfVehicle: "Truck",
-    registrationDate: "2011-12-05",
-    vehicleStatus: "In Maintenance",
-    assignedDriver: "Robert Miller",
-    assignedJanitors: ["Sarah Wilson"],
-  },
-              {
-    vin: "JH4KA9650MC123456",
-    vehicleNumberPlate: "MN012OP",
-    make: "Honda",
-    model: "Civic",
-    yearOfManufacture: "2010",
-    fuelType: "Diesel",
-    typeOfVehicle: "Truck",
-    registrationDate: "2011-12-05",
-    vehicleStatus: "In Maintenance",
-    assignedDriver: "Robert Miller",
-    assignedJanitors: ["Sarah Wilson"],
-  },
-                {
-    vin: "JH4KA9650MC123456",
-    vehicleNumberPlate: "MN012OP",
-    make: "Honda",
-    model: "Civic",
-    yearOfManufacture: "2010",
-    fuelType: "Diesel",
-    typeOfVehicle: "Truck",
-    registrationDate: "2011-12-05",
-    vehicleStatus: "In Maintenance",
-    assignedDriver: "Robert Miller",
-    assignedJanitors: ["Sarah Wilson"],
-  },
-];
 
- 
+];
 
 export const FuelTypes = [
   "Petrol",
@@ -165,81 +84,25 @@ export const VehicleStatus = [
 ]
 
 export const Drivers = [
-  {
-    image: "/assets/images/dr-green.png",
-    name: "Elliot Green",
-  },
-  {
-    image: "/assets/images/dr-cameron.png",
-    name: "Lydia Kai",
-  },
-  {
-    image: "/assets/images/dr-livingston.png",
-    name: "David Little",
-  },
-  {
-    image: "/assets/images/dr-peter.png",
-    name: "Peter kwaku",
-  },
-  {
-    image: "/assets/images/dr-powell.png",
-    name: "Edward Danquah",
-  },
-  {
-    image: "/assets/images/dr-remirez.png",
-    name: "Ramada Atu",
-  },
-  {
-    image: "/assets/images/dr-lee.png",
-    name: "Jennfia Emefa",
-  },
-  {
-    image: "/assets/images/dr-cruz.png",
-    name: "Ali Seidu",
-  },
-  {
-    image: "/assets/images/dr-sharma.png",
-    name: "Emmanuel Bafoah",
-  },
+  { id: "d1", image: "/assets/images/dr-livingston.png", name: "David Little" },
+  { id: "d3", image: "/assets/images/dr-cameron.png", name: "Lydia Kai" },
+  { id: "d4", image: "/assets/images/dr-green.png", name: "Elliot Green" },
+  { id: "d5", image: "/assets/images/dr-peter.png", name: "Peter Kwaku" },
+  { id: "d6", image: "/assets/images/dr-powell.png", name: "Edward Danquah" },
+  { id: "d7", image: "/assets/images/dr-remirez.png", name: "Ramada Atu" },
+  { id: "d8", image: "/assets/images/dr-lee.png", name: "Jennfia Emefa" },
+  { id: "d9", image: "/assets/images/dr-cruz.png", name: "Ali Seidu" },
+  { id: "d10", image: "/assets/images/dr-sharma.png", name: "Emmanuel Bafoah" },
 ];
 
 export const Janitors = [
-
-  {
-    image: "/assets/images/dr-livingston.png",
-    name: "David Livingston",
-  },
-  {
-    image: "/assets/images/dr-peter.png",
-    name: "Evan Peter",
-  },
-    {
-    image: "/assets/images/dr-green.png",
-    name: "John Green",
-  },
-  {
-    image: "/assets/images/dr-cameron.png",
-    name: "Leila Cameron",
-  },
-  {
-    image: "/assets/images/dr-lee.png",
-    name: "Jasmine Lee",
-  },
-    {
-    image: "/assets/images/dr-powell.png",
-    name: "Jane Powell",
-  },
-  {
-    image: "/assets/images/dr-cruz.png",
-    name: "Alyana Cruz",
-  },
-  {
-    image: "/assets/images/dr-sharma.png",
-    name: "Hardik Sharma",
-  },
-  {
-    image: "/assets/images/dr-remirez.png",
-    name: "Alex Ramirez",
-  },
-  
+  { id: "j1", image: "/assets/images/dr-livingston.png", name: "David Livingston" },
+  { id: "j2", image: "/assets/images/dr-peter.png", name: "Evan Peter" },
+  { id: "j3", image: "/assets/images/dr-green.png", name: "John Green" },
+  { id: "j4", image: "/assets/images/dr-cameron.png", name: "Leila Cameron" },
+  { id: "j5", image: "/assets/images/dr-lee.png", name: "Jasmine Lee" },
+  { id: "j6", image: "/assets/images/dr-powell.png", name: "Jane Powell" },
+  { id: "j7", image: "/assets/images/dr-cruz.png", name: "Alyana Cruz" },
+  { id: "j8", image: "/assets/images/dr-sharma.png", name: "Hardik Sharma" },
+  { id: "j9", image: "/assets/images/dr-remirez.png", name: "Alex Ramirez" },
 ];

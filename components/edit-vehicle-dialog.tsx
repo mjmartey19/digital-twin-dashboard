@@ -46,16 +46,18 @@ export function EditVehicleDialog({ vehicle, open, onOpenChange }: EditVehicleDi
         ? new Date(vehicle.registrationDate)
         : new Date(),
       vehicleStatus: vehicle.vehicleStatus || "",
-      assignedDriver: vehicle.assignedDriver || "",
-      assignedJanitors: vehicle.assignedJanitors || "",
+      assignedDriver: vehicle.assignedDriver || [],
+      assignedJanitors: vehicle.assignedJanitors || [],
     },
   });
+
+
 
   async function onSubmit(values: z.infer<typeof VehicleSchema>) {
     editVehicleTransition(async () => {
       console.log(values);
       toast.success("Vehicle updated successfully!");
-      onOpenChange(false); // Close the dialog after successful update
+      onOpenChange(false);
     });
   }
 
@@ -186,8 +188,8 @@ export function EditVehicleDialog({ vehicle, open, onOpenChange }: EditVehicleDi
                   fieldType={FormFieldType.SELECT}
                   control={form.control}
                   name="assignedJanitors"
-                  label="Assigned Janitor"
-                  placeholder="Select a Janitor"
+                  label="Assigned Janitors"
+                  placeholder="Select Janitor"
                 >
                   {Janitors.map((janitor, i) => (
                     <SelectItem key={janitor.name + i} value={janitor.name}>

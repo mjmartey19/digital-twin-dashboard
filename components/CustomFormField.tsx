@@ -18,15 +18,14 @@ import { E164Number } from "libphonenumber-js/core";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
-  Select as CustomSelect, // Renamed to avoid conflict
+  Select as CustomSelect,
   SelectContent,
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
 import { Textarea } from "./ui/textarea";
 import { Checkbox } from "./ui/checkbox";
-import ReactSelect, { MultiValue } from "react-select"; // Renamed to ReactSelect
-
+import ReactSelect, { MultiValue } from "react-select";
 interface SelectOption {
   label: string | JSX.Element;
   value: string;
