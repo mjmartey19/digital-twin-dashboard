@@ -132,6 +132,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
            <ReactSelect
         options={options}
         isSearchable
+        isClearable
         placeholder={props.placeholder}
         className="basic-single"
         classNamePrefix="react-select"
@@ -146,32 +147,27 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
       );
 
 
-    case FormFieldType.MULTI_SELECT:
-  
-     return (
-        <FormControl>
-           <ReactSelect
-        options={options}
-        isSearchable
-        isMulti
-        placeholder={props.placeholder}
-        className="basic-single"
-        classNamePrefix="react-select"
-        // Set the default values for the multi-select field
-        defaultValue={ options?.filter((option) =>
-          field.value?.some((val : Staffprops) => val.id === option.value.id)
-        )}
-        // Update the form state when values are selected
-        onChange={(selectedOptions: MultiValue<{ value: any; label: React.ReactNode }>) => {
-          field.onChange(selectedOptions ? selectedOptions.map(option => option.value) : []);
-        }}
-        value={ options?.filter((option) =>
-          field.value?.some((val : Staffprops) => val.id === option.value.id)
-        )}
-      />
-        </FormControl>
-      );
-
+      case FormFieldType.MULTI_SELECT:
+        return (
+          <FormControl>
+            <ReactSelect
+              options={options}
+              isSearchable
+              isMulti
+              placeholder={props.placeholder}
+              className="basic-single"
+              classNamePrefix="react-select"
+              defaultValue={options?.filter(option => 
+                field.value?.some((val: Staffprops) => val.id === option.value.id)
+              )}
+              onChange={(selectedOptions: MultiValue<{ value: any; label: React.ReactNode }>) => {
+                const selectedValues = selectedOptions ? selectedOptions.map(option => option.value) : [];
+                field.onChange(selectedValues);
+              }}
+            />
+          </FormControl>
+        );
+      
     case FormFieldType.CHECKBOX:
       return (
         <FormControl>

@@ -37,7 +37,7 @@ export function AddVehicleDialog() {
   const janitorOptions = Janitors.map((janitor) => ({
     value: janitor,
     label: (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2" key={janitor.id}>
         <Image
           src={janitor.image}
           width={32}
@@ -53,7 +53,7 @@ export function AddVehicleDialog() {
   const driverOptions = Drivers.map((driver) => ({
     value: driver,
     label: (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2" key={driver.id}>
         <Image
           src={driver.image}
           width={32}
