@@ -11,9 +11,9 @@ export const vehiclesData = [
     vehicleStatus: "En Route",
     assignedDriver: { id: "d1" , name: "David Little",  image: "/assets/images/dr-livingston.png"},
     assignedJanitors: [
-      { id: "j1", name: "David Clark", image: "/assets/images/dr-livingston.png" },
-      { id: "j2", name: "Elliot Lassey", image: "/assets/images/dr-cameron.png" },
-      { id: "j3", name: "Edward Danquah", image: "/assets/images/dr-cruz.png" },
+      { id: "j1",  name: "David Livingston", image: "/assets/images/dr-livingston.png" },
+      { id: "j2",  name: "Evan Peter", image: "/assets/images/dr-peter.png" },
+      { id: "j3", name: "John Green", image: "/assets/images/dr-green.png" },
     ],
   },
   {
@@ -28,8 +28,8 @@ export const vehiclesData = [
     vehicleStatus: "Available",
      assignedDriver: { id: "d2", name: "Michael Brown", image: "/assets/images/dr-peter.png" },
     assignedJanitors: [
-      { id: "j1", name: "David Clark", image: "/assets/images/dr-lee.png" },
-      { id: "j2", name: "Elliot Lassey", image: "/assets/images/dr-peter.png" },
+      { id: "j1",  name: "David Livingston", image: "/assets/images/dr-livingston.png" },
+      { id: "j2",  name: "Evan Peter", image: "/assets/images/dr-peter.png" },
     ],
   },
   {
@@ -44,7 +44,7 @@ export const vehiclesData = [
     vehicleStatus: "Out of Service",
     assignedDriver: { id: "d3", name: "Lydia Kai", image: "/assets/images/dr-green.png" },
     assignedJanitors: [
-      { id: "j4", name: "Emily Davis", image: "/assets/images/dr-remirez.png" },
+      { id: "j4", name: "Leila Cameron" , image: "/assets/images/dr-cameron.png"},
     ],
   },
   {
@@ -59,7 +59,7 @@ export const vehiclesData = [
     vehicleStatus: "In Maintenance",
     assignedDriver:   { id: "d4", name: "Elliot Green", image: "/assets/images/dr-green.png" },
     assignedJanitors: [
-      { id: "j5", name: "Sarah Wilson", image: "/assets/images/dr-cruz.png" },
+      { id: "j4", name: "Leila Cameron" , image: "/assets/images/dr-cameron.png"},
     ],
   },
   // {
@@ -145,7 +145,7 @@ export const VehicleStatus = [
 
 export const Drivers = [
   { id: "d1", name: "David Little", image: "/assets/images/dr-livingston.png" },
-   { id: "d2", name: "Michael Brown", image: "/assets/images/dr-peter.png" },
+  { id: "d2", name: "Michael Brown", image: "/assets/images/dr-peter.png" },
   { id: "d3", name: "Lydia Kai", image: "/assets/images/dr-cameron.png" },
   { id: "d4", name: "Elliot Green", image: "/assets/images/dr-green.png" },
   { id: "d5", name: "Peter Kwaku",image: "/assets/images/dr-peter.png" },
@@ -157,13 +157,14 @@ export const Drivers = [
 ];
 
 export const Janitors = [
-  { id: "j1", image: "/assets/images/dr-livingston.png", name: "David Livingston" },
-  { id: "j2", image: "/assets/images/dr-peter.png", name: "Evan Peter" },
-  { id: "j3", image: "/assets/images/dr-green.png", name: "John Green" },
-  { id: "j4", image: "/assets/images/dr-cameron.png", name: "Leila Cameron" },
-  { id: "j5", image: "/assets/images/dr-lee.png", name: "Jasmine Lee" },
-  { id: "j6", image: "/assets/images/dr-powell.png", name: "Jane Powell" },
-  { id: "j7", image: "/assets/images/dr-cruz.png", name: "Alyana Cruz" },
-  { id: "j8", image: "/assets/images/dr-sharma.png", name: "Hardik Sharma" },
-  { id: "j9", image: "/assets/images/dr-remirez.png", name: "Alex Ramirez" },
+  { id: "j1",  name: "David Livingston", image: "/assets/images/dr-livingston.png" },
+  { id: "j2",  name: "Evan Peter", image: "/assets/images/dr-peter.png" },
+  { id: "j3", name: "John Green", image: "/assets/images/dr-green.png" },
+  { id: "j4", name: "Leila Cameron" , image: "/assets/images/dr-cameron.png"},
+  { id: "j5", name: "Jasmine Lee", image: "/assets/images/dr-lee.png" },
+  { id: "j6", name: "Jane Powell", image: "/assets/images/dr-powell.png" },
+  { id: "j7", name: "Alyana Cruz", image: "/assets/images/dr-cruz.png" },
+  { id: "j8", name: "Hardik Sharma", image: "/assets/images/dr-sharma.png" },
+  { id: "j9",  name: "Alex Ramirez", image: "/assets/images/dr-remirez.png" },
 ];
+

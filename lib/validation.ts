@@ -23,7 +23,11 @@ export const VehicleSchema = z.object({
   typeOfVehicle: z.string().min(1, "Vehicle type is required").max(255, "Vehicle type must be less than 255 characters"),
   registrationDate: z.date().optional(), 
   vehicleStatus: z.string().min(1, "Vehicle status is required").max(255, "Vehicle status must be less than 255 characters"),
-  assignedDriver: z.string().optional(),
+  assignedDriver: z.object({ // Define the shape of the assignedDriver object, for example:
+    id: z.string(),
+    name: z.string(),
+    image: z.string(),
+  }).optional(),
  assignedJanitors: z.array(z.string().optional()),
 });
 

@@ -35,7 +35,7 @@ export function AddVehicleDialog() {
   const [isAddVehiclePending, addVehicleTransition] = useTransition();
 
   const janitorOptions = Janitors.map((janitor) => ({
-    value: janitor.name,
+    value: janitor,
     label: (
       <div className="flex items-center gap-2">
         <Image
@@ -46,6 +46,22 @@ export function AddVehicleDialog() {
           className="rounded-full"
         />
         <span>{janitor.name}</span>
+      </div>
+    ),
+  }));
+  
+  const driverOptions = Drivers.map((driver) => ({
+    value: driver,
+    label: (
+      <div className="flex items-center gap-2">
+        <Image
+          src={driver.image}
+          width={32}
+          height={32}
+          alt={driver.name}
+          className="rounded-full"
+        />
+        <span>{driver.name}</span>
       </div>
     ),
   }));
@@ -64,7 +80,7 @@ export function AddVehicleDialog() {
       typeOfVehicle: "",
       registrationDate: new Date(),
       vehicleStatus: "",
-      assignedDriver: "",
+      assignedDriver: {},
       assignedJanitors: [],
     },
   });
@@ -195,7 +211,7 @@ export function AddVehicleDialog() {
                     name="assignedDriver"
                     label="Assigned Driver"
                     placeholder="Select a driver"
-                    options={Drivers.map((driver) => (driver as any))}
+                    options={driverOptions}
                   />
                   <CustomFormField
                     fieldType={FormFieldType.MULTI_SELECT}
