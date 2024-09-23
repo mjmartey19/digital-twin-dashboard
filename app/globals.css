@@ -489,3 +489,25 @@
 .PhoneInputInput::placeholder {
   color: #1a1d21;
 }
+
+/* =====  REACT SELECT OVERRIDES */
+.react-select__menu {
+  @apply bg-white !important;
+}
+
+.react-select__option {
+  @apply text-black bg-white !important;
+  @apply hover:bg-gray-200 !important;
+}
+
+.react-select__option--is-focused {
+  @apply bg-gray-200 !important;
+  /* Tailwind class for #eaeaea */
+}
+
+
+
+.react-select__option--is-selected {
+  @apply bg-white !important;
+  /* Keep the background white for selected option */
+}

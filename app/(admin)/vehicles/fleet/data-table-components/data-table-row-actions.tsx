@@ -20,6 +20,10 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
+  const handleView = () => {
+    console.log("View Vehicle Details", row.original);
+  };
+
   const handleEdit = () => {
     setIsEditDialogOpen(true);
   };
@@ -85,6 +89,8 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-[200px] max-h-[400px] overflow-y-auto">
+          <DropdownMenuItem onClick={handleView}>View</DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleEdit}>Edit</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>

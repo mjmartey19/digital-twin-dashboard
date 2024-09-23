@@ -13,7 +13,7 @@ import {
   DialogContent,
 
 } from "@/components/ui/dialog";
-import { toast } from "sonner";
+import { toast } from "react-toastify";
 import { useTransition } from "react";
 
 import CustomFormField from "./CustomFormField";
@@ -42,13 +42,12 @@ export function EditVehicleDialog({ vehicle, open, onOpenChange }: EditVehicleDi
       yearOfManufacture: vehicle.yearOfManufacture || "",
       fuelType: vehicle.fuelType || "",
       typeOfVehicle: vehicle.typeOfVehicle || "",
-      registrationDate: vehicle.registrationDate
-        ? new Date(vehicle.registrationDate)
-        : new Date(),
+      registrationDate: vehicle.registrationDate ? new Date(vehicle.registrationDate) : new Date(),
       vehicleStatus: vehicle.vehicleStatus || "",
-      assignedDriver: vehicle.assignedDriver || [],
+      assignedDriver: vehicle.assignedDriver || null,
       assignedJanitors: vehicle.assignedJanitors || [],
-    },
+    }
+
   });
 
 
@@ -162,50 +161,28 @@ export function EditVehicleDialog({ vehicle, open, onOpenChange }: EditVehicleDi
 
             <section className="space-y-6">
               <div className="flex flex-col gap-6 xl:flex-row">
+
                 <CustomFormField
-                  fieldType={FormFieldType.SELECT}
+                  fieldType={FormFieldType.SELECTSEARCH}
                   control={form.control}
                   name="assignedDriver"
                   label="Assigned Driver"
                   placeholder="Select a driver"
-                >
-                  {Drivers.map((driver, i) => (
-                    <SelectItem key={driver.name + i} value={driver.name}>
-                      <div className="flex cursor-pointer items-center gap-2">
-                        <Image
-                          src={driver.image}
-                          width={32}
-                          height={32}
-                          alt="driver"
-                          className="rounded-full"
-                        />
-                        <p>{driver.name}</p>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </CustomFormField>
+                  options={Drivers.map((driver) => (driver as any))}
+                />
+
+
+
+
                 <CustomFormField
-                  fieldType={FormFieldType.SELECT}
+                  fieldType={FormFieldType.MULTI_SELECT}
                   control={form.control}
                   name="assignedJanitors"
                   label="Assigned Janitors"
                   placeholder="Select Janitor"
-                >
-                  {Janitors.map((janitor, i) => (
-                    <SelectItem key={janitor.name + i} value={janitor.name}>
-                      <div className="flex cursor-pointer items-center gap-2">
-                        <Image
-                          src={janitor.image}
-                          width={32}
-                          height={32}
-                          alt="janitor"
-                          className="rounded-full border border-dark-500"
-                        />
-                        <p>{janitor.name}</p>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </CustomFormField>
+                  options={Janitors.map((janitor) => (janitor as any))}
+                />
+
               </div>
             </section>
 

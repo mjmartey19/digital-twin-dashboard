@@ -16,7 +16,9 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import { Row } from "@tanstack/react-table";
 import { TrashIcon } from "lucide-react";
 import { useTransition, useState } from "react";
-import { toast } from "sonner";
+import { toast } from "react-toastify"
+
+import 'react-toastify/dist/ReactToastify.css'; // Import CSS for React Toaster
 
 interface DeleteVehiclesDialogProps
   extends React.ComponentPropsWithoutRef<typeof Dialog> {
@@ -80,7 +82,6 @@ export function DeleteVehicleDialog({
             Please review the details carefully before proceeding.
           </DialogDescription>
         </DialogHeader>
-
 
         <DialogFooter>
           <DialogClose asChild>

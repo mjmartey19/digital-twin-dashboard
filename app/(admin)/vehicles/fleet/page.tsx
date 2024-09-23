@@ -8,7 +8,7 @@ export default async function FleetPage() {
   const data = vehiclesData;
   return (
     <ContentLayout title="Vehicle">
-      <div className="pb-2 pt-20">
+      <div className="pb-2">
         <DataTable data={data} columns={columns} />
       </div>
     </ContentLayout>

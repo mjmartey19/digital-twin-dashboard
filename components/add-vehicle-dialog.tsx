@@ -13,7 +13,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { toast } from "sonner";
+import { toast } from "react-toastify";
 
 import { useState, useTransition } from "react";
 import { Plus } from "lucide-react";
@@ -46,22 +46,6 @@ export function AddVehicleDialog() {
           className="rounded-full"
         />
         <span>{janitor.name}</span>
-      </div>
-    ),
-  }));
-
-  const driverOptions = Drivers.map((driver) => ({
-    value: driver.name,
-    label: (
-      <div className="flex items-center gap-2">
-        <Image
-          src={driver.image}
-          width={32}
-          height={32}
-          alt={driver.name}
-          className="rounded-full"
-        />
-        <span>{driver.name}</span>
       </div>
     ),
   }));
@@ -211,7 +195,7 @@ export function AddVehicleDialog() {
                     name="assignedDriver"
                     label="Assigned Driver"
                     placeholder="Select a driver"
-                    options={driverOptions}
+                    options={Drivers.map((driver) => (driver as any))}
                   />
                   <CustomFormField
                     fieldType={FormFieldType.MULTI_SELECT}
