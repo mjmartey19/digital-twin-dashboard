@@ -21,7 +21,7 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   const handleView = () => {
-    console.log("View Vehicle Details", row.original);
+
   };
 
   const handleEdit = () => {
@@ -76,8 +76,11 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
     console.log("Route Information", row.original);
   };
 
+
+
   return (
     <>
+    <div style={{ position: 'relative' }}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -88,7 +91,7 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
             <span className="sr-only">Open menu</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" className="w-[200px] max-h-[400px] overflow-y-auto">
+        <DropdownMenuContent align="end" className="w-[200px] max-h-[300px] overflow-y-auto">
           <DropdownMenuItem onClick={handleView}>View</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleEdit}>Edit</DropdownMenuItem>
@@ -118,6 +121,7 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
           <DropdownMenuItem onClick={handleRouteInformation}>Route Information</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      </div>
 
       {/* Render the EditVehicleDialog and pass the row data */}
       <EditVehicleDialog

@@ -21,6 +21,7 @@ export function DataTableViewOptions<TData>({
   table,
 }: DataTableViewOptionsProps<TData>) {
   return (
+    <div style={{ position: 'relative' }}>
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
@@ -32,7 +33,7 @@ export function DataTableViewOptions<TData>({
           View
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="w-[200px]">
+      <DropdownMenuContent align="end" className="w-[200px]">
         <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
@@ -55,5 +56,6 @@ export function DataTableViewOptions<TData>({
           })}
       </DropdownMenuContent>
     </DropdownMenu>
+    </div>
   );
 }
