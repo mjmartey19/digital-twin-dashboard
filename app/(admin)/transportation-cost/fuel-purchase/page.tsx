@@ -1,5 +1,6 @@
+"use client"
+import { useState } from "react";
 import Link from "next/link";
-
 import PlaceholderContent from "@/components/demo/placeholder-content";
 import { ContentLayout } from "@/components/admin-panel/content-layout";
 import {
@@ -10,8 +11,24 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
+import {fuelPurchaseMockData} from "./mockData"
+import {columns} from "./TableColums"
+import { DataTable } from "./DataTable"
+import { getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
+import SearchTable from "../../../../components/admin-panel/SearchTable";
+import { DeleteVehicleDialog } from "@/components/delete-vehicle-dialog";
 
 export default function FuelPurchasePage() {
+  const [tableData, setTableData] = useState(fuelPurchaseMockData)
+  
+  const table = useReactTable({
+    data: tableData,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+  });
+
   return (
     <ContentLayout title="Fuel Purchase">
       <Breadcrumb>
@@ -33,7 +50,27 @@ export default function FuelPurchasePage() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <PlaceholderContent />
+      {/* <PlaceholderContent /> */}
+
+      {/* Add your page content here */}
+      <div className="w-full mt-4 flex flex-col gap-3">
+        <div className="w-full flex justify-between">
+          <SearchTable
+            table={table}
+            searchBy={"driverName"}
+            placeholder={"search by driver's Name"}
+          />
+          {table.getFilteredSelectedRowModel().rows.length > 0 ? (
+            <DeleteVehicleDialog
+              vehicles={table
+                .getFilteredSelectedRowModel()
+                .rows.map((row) => row.original as any)}
+              onSuccess={() => table.toggleAllRowsSelected(false)}
+            />
+          ) : null}
+        </div>
+        <DataTable columns={columns} table={table} />
+      </div>
     </ContentLayout>
   );
 }
