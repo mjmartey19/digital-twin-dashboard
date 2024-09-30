@@ -18,7 +18,7 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { DataTablePagination } from "../../../../components/admin-panel/data-table-pagination";
+import { DataTablePagination } from "./data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

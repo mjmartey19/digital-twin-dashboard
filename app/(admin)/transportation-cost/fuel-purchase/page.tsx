@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import {fuelPurchaseMockData} from "./mockData"
 import {columns} from "./TableColums"
-import { DataTable } from "./DataTable"
+import { DataTable } from "../../../../components/admin-panel/DataTable"
 import { getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
 import SearchTable from "../../../../components/admin-panel/SearchTable";
 import { DeleteVehicleDialog } from "@/components/delete-vehicle-dialog";
