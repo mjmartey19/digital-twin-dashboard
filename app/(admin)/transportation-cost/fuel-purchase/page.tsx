@@ -13,10 +13,11 @@ import {
 } from "@/components/ui/breadcrumb";
 import {fuelPurchaseMockData} from "./mockData"
 import {columns} from "./TableColums"
-import { DataTable } from "./DataTable"
+import { DataTable } from "../../../../components/admin-panel/DataTable"
 import { getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
 import SearchTable from "../../../../components/admin-panel/SearchTable";
 import { DeleteVehicleDialog } from "@/components/delete-vehicle-dialog";
+import { DataTableViewOptions } from "@/components/admin-panel/data-table-view-options";
 
 export default function FuelPurchasePage() {
   const [tableData, setTableData] = useState(fuelPurchaseMockData)
@@ -53,7 +54,7 @@ export default function FuelPurchasePage() {
       {/* <PlaceholderContent /> */}
 
       {/* Add your page content here */}
-      <div className="w-full mt-4 flex flex-col gap-3">
+      <div className="w-full h-full mt-4 flex flex-col gap-3">
         <div className="w-full flex justify-between">
           <SearchTable
             table={table}
@@ -68,6 +69,8 @@ export default function FuelPurchasePage() {
               onSuccess={() => table.toggleAllRowsSelected(false)}
             />
           ) : null}
+
+          <DataTableViewOptions table={table}/>
         </div>
         <DataTable columns={columns} table={table} />
       </div>
