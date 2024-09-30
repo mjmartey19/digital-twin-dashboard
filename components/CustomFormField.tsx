@@ -26,27 +26,7 @@ import {
 import { Textarea } from "./ui/textarea";
 import { Checkbox } from "./ui/checkbox";
 import ReactSelect, { MultiValue } from "react-select";
-interface SelectOption {
-  id: string;
-  name: string | JSX.Element;
-  image: string;
-}
-interface CustomProps {
-  control: Control<any>;
-  fieldType: FormFieldType;
-  name: string;
-  label?: string;
-  type?: string;
-  placeholder?: string;
-  iconSrc?: string;
-  iconAlt?: string;
-  disabled?: boolean;
-  dateFormat?: string;
-  showTimeSelect?: boolean;
-  children?: React.ReactNode;
-  options?: SelectOption[];
-  renderSkeleton?: (field: any) => React.ReactNode;
-}
+import { Drivers, Janitors } from "@/constants";
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   const {
@@ -147,91 +127,47 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
         </FormControl>
       );
     case FormFieldType.SELECTSEARCH:
-      const selectedOption = props.options?.find(option => option.id === field.value?.id) || null;
-      console.log(selectedOption);
-      console.log(props.options);
-
       return (
         <FormControl>
-          <ReactSelect
-            className="basic-single"
-            classNamePrefix="react-select"
-            defaultValue={selectedOption}
-            isSearchable
-            isClearable
-            onChange={(selectedOption) => field.onChange(selectedOption)}
-            placeholder={props.placeholder}
-            options={options}
-            formatOptionLabel={(option) => (
-              <div className="flex items-center gap-2">
-                <Image
-                  src={option.image}
-                  width={32}
-                  height={32}
-                  alt="driver"
-                  className="rounded-full"
-                />
-                <p>{option.name}</p> {/* Display the option's name */}
-              </div>
-            )}
-
-            styles={{
-              control: (base, state) => ({
-                ...base,
-                borderColor: state.isFocused ? 'none' : base.borderColor,
-                boxShadow: 'none',
-                '&:hover': {
-                  borderColor: 'none',
-                },
-              }),
-
-            }}
-          />
+           <ReactSelect
+        options={options}
+        isSearchable
+        isClearable
+        placeholder={props.placeholder}
+        className="basic-single"
+        classNamePrefix="react-select"
+        // Set the default value for the select field
+        defaultValue={options?.find((option) => option.value.id === field.value.id)}
+        // Update the form state when a new value is selected
+        onChange={(selectedOption) => field.onChange(selectedOption?.value)}
+       
+      />
 
         </FormControl>
       );
 
 
-    case FormFieldType.MULTI_SELECT:
-      console.log(field.value);
-      console.log(options)
-      return (
-        <FormControl>
-          <ReactSelect
-            defaultValue={field.value || []}
-            isMulti
-            onChange={(selectedOptions: MultiValue<SelectOption>) => {
-              field.onChange(selectedOptions || []);
-            }}
-            options={options as SelectOption[]}
-            formatOptionLabel={(option) => (
-              <div className="flex items-center gap-2">
-                <Image
-                  src={option.image}
-                  width={32}
-                  height={32}
-                  alt="janitor"
-                  className="rounded-full"
-                />
-                <p>{option.name}</p>
-              </div>
-            )}
-            className="react-select"
-            placeholder={props.placeholder}
-            styles={{
-              control: (base, state) => ({
-                ...base,
-                borderColor: state.isFocused ? 'none' : base.borderColor,
-                boxShadow: 'none',
-                '&:hover': {
-                  borderColor: 'none',
-                },
-              }),
-            }}
-          />
-        </FormControl>
-      );
-
+      case FormFieldType.MULTI_SELECT:
+        return (
+          <FormControl>
+            <ReactSelect
+              options={options}
+              isSearchable
+              isMulti
+              placeholder={props.placeholder}
+              className="basic-single"
+              classNamePrefix="react-select"
+              defaultValue={options?.filter(option => 
+                field.value?.some((val: Staffprops) => val.id === option.value.id)
+              )}
+              onChange={(selectedOptions: MultiValue<{ value: any; label: React.ReactNode }>) => {
+                const selectedValues = selectedOptions ? selectedOptions.map(option => option.value) : [];
+                field.onChange(selectedValues);
+              }}
+            />
+          </FormControl>
+        );
+      
     case FormFieldType.CHECKBOX:
       return (
         <FormControl>

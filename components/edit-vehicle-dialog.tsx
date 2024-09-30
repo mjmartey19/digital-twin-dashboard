@@ -29,6 +29,37 @@ interface EditVehicleDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
+const janitorOptions = Janitors.map((janitor) => ({
+  value: janitor,
+  label: (
+    <div className="flex items-center gap-2">
+      <Image
+        src={janitor.image}
+        width={32}
+        height={32}
+        alt={janitor.name}
+        className="rounded-full"
+      />
+      <span>{janitor.name}</span>
+    </div>
+  ),
+}));
+
+const driverOptions = Drivers.map((driver) => ({
+  value: driver,
+  label: (
+    <div className="flex items-center gap-2">
+      <Image
+        src={driver.image}
+        width={32}
+        height={32}
+        alt={driver.name}
+        className="rounded-full"
+      />
+      <span>{driver.name}</span>
+    </div>
+  ),
+}));
 export function EditVehicleDialog({ vehicle, open, onOpenChange }: EditVehicleDialogProps) {
   const [isEditVehiclePending, editVehicleTransition] = useTransition();
 
@@ -168,20 +199,18 @@ export function EditVehicleDialog({ vehicle, open, onOpenChange }: EditVehicleDi
                   name="assignedDriver"
                   label="Assigned Driver"
                   placeholder="Select a driver"
-                  options={Drivers.map((driver) => (driver as any))}
+                  options={driverOptions}
                 />
 
 
-
-
-                <CustomFormField
-                  fieldType={FormFieldType.MULTI_SELECT}
-                  control={form.control}
-                  name="assignedJanitors"
-                  label="Assigned Janitors"
-                  placeholder="Select Janitor"
-                  options={Janitors.map((janitor) => (janitor as any))}
-                />
+                  <CustomFormField
+                    fieldType={FormFieldType.MULTI_SELECT}
+                    control={form.control}
+                    name="assignedJanitors"
+                    label="Assigned Janitors"
+                    placeholder="Select Janitors"
+                    options={janitorOptions}
+                  />
 
               </div>
             </section>

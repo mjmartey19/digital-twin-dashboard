@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import * as React from "react";
 import {
   ColumnDef,
@@ -65,10 +65,12 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="space-y-4 w-full flex flex-col ">
+    <div className="space-y-4 w-full flex flex-col">
       <DataTableToolbar table={table} />
-      <div className="rounded-md border max-w-full h-[30vh] overflow-auto">
-        <ScrollArea className="w-full h-full">
+ 
+      <div className="rounded-md border max-w-full h-[60vh] overflow-auto">
+        <ScrollArea className="h-full w-full">
+          
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
