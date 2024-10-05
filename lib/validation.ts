@@ -36,3 +36,17 @@ export const VehicleSchema = z.object({
 });
 
 
+export const fuelingFormSchema = z.object({
+  vin: z.string(), 
+  driverName: z.string(), 
+  fuelType: z.enum(["Diesel", "Petrol"]), 
+  fuelPurchasedLitres: z.number().positive(), 
+  fuelCostGHS: z.number().positive(), 
+  fuelStationName: z.string(), 
+  // fuelingLocation: z.object({
+  //   gps: z.string(), 
+  //   address: z.string(), 
+  // }),
+  paymentMethod: z.string().nullable(), 
+  noteRemark: z.string().optional(), 
+});

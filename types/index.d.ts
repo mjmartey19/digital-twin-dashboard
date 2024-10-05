@@ -26,5 +26,6 @@ declare interface CustomProps {
   showTimeSelect?: boolean;
   children?: React.ReactNode;
   options?: SelectOption[];
+  className?: string;
   renderSkeleton?: (field: any) => React.ReactNode;
 }

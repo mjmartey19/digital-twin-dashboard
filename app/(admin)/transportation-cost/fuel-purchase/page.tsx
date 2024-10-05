@@ -18,6 +18,7 @@ import { getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTa
 import SearchTable from "../../../../components/admin-panel/SearchTable";
 import { DeleteVehicleDialog } from "@/components/delete-vehicle-dialog";
 import { DataTableViewOptions } from "@/components/admin-panel/data-table-view-options";
+import DataEntryForm from "./DataEntryForm";
 
 export default function FuelPurchasePage() {
   const [tableData, setTableData] = useState(fuelPurchaseMockData)
@@ -70,7 +71,10 @@ export default function FuelPurchasePage() {
             />
           ) : null}
 
-          <DataTableViewOptions table={table}/>
+          <div className="flex place-items-center gap-4">
+            <DataEntryForm />
+            <DataTableViewOptions table={table} />
+          </div>
         </div>
         <DataTable columns={columns} table={table} />
       </div>

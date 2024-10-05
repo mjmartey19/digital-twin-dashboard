@@ -38,7 +38,8 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     showTimeSelect,
     dateFormat,
     renderSkeleton,
-    options
+    options,
+    className
   } = props;
 
   switch (fieldType) {
@@ -58,7 +59,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             <Input
               {...field}
               placeholder={placeholder}
-              className="shad-input border-0 focus:border-green-500"
+              className={`shad-input border-0 focus:border-green-500 ${className}`}
               type={type}
             />
           </FormControl>
@@ -70,7 +71,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           <Textarea
             placeholder={props.placeholder}
             {...field}
-            className="shad-textArea"
+            className={`shad-textArea ${className}`}
             disabled={props.disabled}
           />
         </FormControl>
@@ -85,7 +86,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             withCountryCallingCode
             value={field.value as E164Number | undefined}
             onChange={field.onChange}
-            className="input-phone"
+            className={`input-phone${className}`}
           />
         </FormControl>
       );
@@ -137,7 +138,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
         className="basic-single"
         classNamePrefix="react-select"
         // Set the default value for the select field
-        defaultValue={options?.find((option) => option.value.id === field.value.id)}
+        defaultValue={options?.find((option) => option.value.id === (field.value as Staffprops)?.id)}
         // Update the form state when a new value is selected
         onChange={(selectedOption) => field.onChange(selectedOption?.value)}
        
