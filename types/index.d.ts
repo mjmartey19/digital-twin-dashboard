@@ -29,3 +29,16 @@ declare interface CustomProps {
   className?: string;
   renderSkeleton?: (field: any) => React.ReactNode;
 }
+
+export interface StaffMember {
+  staffId: string;                           
+  name: string;                               
+  role: string;                               
+  vehicleIdentificationNumber: string;      
+  hoursWorked: string;                       
+  wages: string;                             
+  dateAssigned: string;                       
+  phoneNo: string;                           
+  email: string;                            
+  qualifications: string;                     
+}
