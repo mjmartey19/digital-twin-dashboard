@@ -66,3 +66,18 @@ export const staffMemberSchema = z.object({
   Email: z.string().email("Email must be a valid email address"),
   Qualifications: z.string().min(1, "Qualifications are required"),
 });
+
+export const maintenanceRecordSchema = z.object({
+  date: z.string().min(1, "Date is required").regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format (YYYY-MM-DD)"),
+  vin: z.string().min(1, "VIN is required"),
+  driverName: z.string().min(1, "Driver name is required"),
+  maintenanceType: z.string().min(1, "Maintenance type is required"),
+  descriptionOfWorkDone: z.string().optional(),  // Optional field
+  partsReplacedServiced: z.string().optional(), // Optional array of strings
+  costOfMaintenance: z.number().min(0, "Cost of maintenance must be a positive number"),
+  serviceProvider: z.string().min(1, "Service provider is required"),
+  technicianName: z.string().min(1, "Technician name is required"),
+  serviceLocation: z.string().min(1, "Service location is required"),
+  nextScheduledMaintenance: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format (YYYY-MM-DD)").optional(),
+  notesRemarks: z.string().optional() // Optional field
+});
