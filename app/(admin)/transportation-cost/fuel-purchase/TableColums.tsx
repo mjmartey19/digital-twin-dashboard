@@ -1,4 +1,4 @@
-import { ColumnDef, filterFns } from '@tanstack/react-table';
+import { ColumnDef } from '@tanstack/react-table';
 import { DataTableColumnHeader } from '../../../../components/admin-panel/data-table-column-header';
 import { Checkbox } from '@/components/ui/checkbox';
 
@@ -25,8 +25,8 @@ export const columns: ColumnDef<any>[] = [
             className="translate-y-0.5"
           />
         ),
-        enableSorting: false,
-        enableHiding: false,
+        enableSorting: true,
+        enableHiding: true,
       },
     {
         accessorKey: "vin",
@@ -34,7 +34,7 @@ export const columns: ColumnDef<any>[] = [
             <DataTableColumnHeader column={column} title="VIN" />
         ),
         cell: (props: any) => <p>{props.getValue()}</p>,
-        filterFn: filterFns.includesString,
+        filterFn: "includesString",
     }, 
     
     {
@@ -43,7 +43,7 @@ export const columns: ColumnDef<any>[] = [
             <DataTableColumnHeader column={column} title="Driver Name" />
           ),
         cell: (props: any) => <p>{props.getValue()}</p>,
-        filterFn: filterFns.includesString,
+        filterFn: "includesString",
     },
     {
         accessorKey: "fuelType",
