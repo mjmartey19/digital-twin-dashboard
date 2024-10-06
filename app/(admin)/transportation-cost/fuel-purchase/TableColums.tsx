@@ -25,8 +25,8 @@ export const columns: ColumnDef<any>[] = [
             className="translate-y-0.5"
           />
         ),
-        enableSorting: false,
-        enableHiding: false,
+        enableSorting: true,
+        enableHiding: true,
       },
     {
         accessorKey: "vin",

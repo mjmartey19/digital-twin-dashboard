@@ -13,12 +13,14 @@ import {
 } from "@/components/ui/breadcrumb";
 import { staffMockData } from "./staffMockData";
 import { getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
-import { columns } from "./tableColumn"
+import { columns } from "./TableColumn"
 import SearchTable from "@/components/admin-panel/SearchTable";
 import { DeleteVehicleDialog } from "@/components/delete-vehicle-dialog";
 import { DataTableViewOptions } from "@/components/admin-panel/data-table-view-options";
-export default function LabourPage() {
+import { DataTable } from "@/components/admin-panel/DataTable";
+import StaffDataEntryForm from "./StaffDataEntryForm";
 
+export default function LabourPage() {
   const [tableData, setTableData ] = useState(staffMockData)
   const table = useReactTable({
     data: tableData,
@@ -27,6 +29,7 @@ export default function LabourPage() {
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   })
+
 
   return (
     <ContentLayout title="Labour Record">
@@ -44,23 +47,25 @@ export default function LabourPage() {
         <div className="w-full flex justify-between">
           <SearchTable
             table={table}
-            searchBy={"name"}
+            searchBy={"Name"}
             placeholder={"search by staff Name"}
           />
-          {table.getFilteredSelectedRowModel().rows.length > 0 ? (
-            <DeleteVehicleDialog
-              vehicles={table
-                .getFilteredSelectedRowModel()
-                .rows.map((row) => row.original as any)}
-              onSuccess={() => table.toggleAllRowsSelected(false)}
-            />
-          ) : null}
 
           <div className="flex place-items-center gap-4">
-            
+            {table.getFilteredSelectedRowModel().rows.length > 0 ? (
+              <DeleteVehicleDialog
+                vehicles={table
+                  .getFilteredSelectedRowModel()
+                  .rows.map((row) => row.original as any)}
+                onSuccess={() => table.toggleAllRowsSelected(false)}
+              />
+            ) : null}
+            <StaffDataEntryForm/>
             <DataTableViewOptions table={table} />
           </div>
         </div>
+
+        <DataTable columns={columns} table={table} />
       </div>
     </ContentLayout>
   );

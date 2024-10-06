@@ -50,3 +50,19 @@ export const fuelingFormSchema = z.object({
   paymentMethod: z.string().nullable(), 
   noteRemark: z.string().optional(), 
 });
+
+
+export const staffMemberSchema = z.object({
+  // staffId: z.string().min(1, "Staff ID is required"),
+  Name: z.string().min(1, "Name is required"),
+  Role: z.string().min(1, "Role is required"),
+  VIN: z.string().min(1, "Vehicle Identification Number is required"),
+  WorkedHours: z.string().min(1, "Hours Worked (Per Shift) is required"),
+  Wages: z.string().min(1, "Wages (GHS) is required"),
+  AssignedDate: z.string().refine((date) => !isNaN(Date.parse(date)), {
+      message: "Date Assigned must be a valid date",
+  }),
+  Phone: z.string().min(1, "Phone No. is required"),
+  Email: z.string().email("Email must be a valid email address"),
+  Qualifications: z.string().min(1, "Qualifications are required"),
+});

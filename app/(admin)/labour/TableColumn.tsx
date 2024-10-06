@@ -3,7 +3,6 @@ import { DataTableColumnHeader } from "@/components/admin-panel/data-table-colum
 import { Checkbox } from '@/components/ui/checkbox';
 
 
-
 export const columns: ColumnDef<any>[] = [
     {
         id: "select",
@@ -26,8 +25,8 @@ export const columns: ColumnDef<any>[] = [
             className="translate-y-0.5"
           />
         ),
-        enableSorting: false,
-        enableHiding: false,
+        enableSorting: true,
+        enableHiding: true,
       },
       {
         accessorKey: "Name",
@@ -54,7 +53,7 @@ export const columns: ColumnDef<any>[] = [
         filterFn: "includesString"
       },
       {
-        accessorKey: "WorkerdHours",
+        accessorKey: "WorkedHours",
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="Hours Worked(per shift)" />
           ),
