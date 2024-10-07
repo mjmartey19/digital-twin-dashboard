@@ -2,7 +2,7 @@
 
 import { Table } from "@tanstack/react-table";
 import { Input } from "@/components/ui/input";
-import { DataTableViewOptions } from "../../../../../components/admin-panel/data-table-view-options";
+import { DataTableViewOptions } from "../../../../components/admin-panel/data-table-view-options";
 
 import { AddVehicleDialog } from "@/components/add-vehicle-dialog";
 import { DeleteVehicleDialog } from "@/components/delete-vehicle-dialog";

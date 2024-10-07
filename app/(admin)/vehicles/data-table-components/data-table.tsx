@@ -24,7 +24,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { DataTablePagination } from "../../../../../components/admin-panel/data-table-pagination";
+import { DataTablePagination } from "../../../../components/admin-panel/data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
@@ -67,10 +67,10 @@ export function DataTable<TData, TValue>({
   return (
     <div className="space-y-4 w-full flex flex-col">
       <DataTableToolbar table={table} />
- 
+
       <div className="rounded-md border max-w-full h-[60vh] overflow-auto">
         <ScrollArea className="h-full w-full">
-          
+
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (

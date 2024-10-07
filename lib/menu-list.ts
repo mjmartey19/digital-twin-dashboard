@@ -35,24 +35,11 @@ export function getMenuList(pathname: string): Menu[] {
       submenus: []
     },
     {
-      href: "",
+      href: "/vehicles",
       label: "Vehicles",
       active: pathname.includes("/vehicles"),
       icon: BusFront,
-      submenus: [
-        {
-          href: "/vehicles/fleet",
-          label: "Fleet",
-          active: pathname.includes("/vehicles/fleet"),
-          sub2menus: []
-        },
-        {
-          href: "/vehicles/vehicle-assignment",
-          label: "Assign Vehicle",
-          active: pathname.includes("/vehicles/vehicle-assignment"),
-          sub2menus: []
-        }
-      ]
+      submenus: []
     },
     {
       href: "/labour",
