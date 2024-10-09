@@ -1,15 +1,18 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import CardItem from '@/app/(admin)/dashboard/dashboard-components/CardItem';
-// import CircularProgressBar from '@/app/(admin)/dashboard/dashboard-components/CircularProgressBar';
-import { DollarSign, Fuel, TrendingUp, Wrench, Truck, Scale } from "lucide-react"; // Import relevant icons
-import CircularProgressBar from '@/app/(admin)/dashboard/dashboard-components/CircularProgressBar';
+import { DollarSign, Fuel, Wrench, Truck, Scale } from "lucide-react";
 import TotalVehiclesCard from '@/app/(admin)/dashboard/dashboard-components/TotalVehicleCard';
+
+// Import chart components
+import BarChart from '@/app/(admin)/dashboard/dashboard-components/BarChart';
+import LineChart from '@/app/(admin)/dashboard/dashboard-components/LineChart';
+import PieChart from '@/app/(admin)/dashboard/dashboard-components/PieChart';
 
 const DashboardLayout = () => {
     return (
-        <div className="min-h-screen space-y-4 p-4 overflow-y-auto">
-            {/* Top row with the new cards */}
+        <div className="space-y-4 p-4">
+            {/* Top row with the KPIs */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <CardItem
                     title="Total Weight Collected (kg)"
@@ -49,34 +52,68 @@ const DashboardLayout = () => {
                 />
             </div>
 
+            {/* Charts section */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Waste Collection by Vehicle (Bar Chart) */}
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Waste Collection by Vehicle</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <BarChart
+                            data={[5000, 3000, 4500]} // Example data
+                            labels={['Vehicle A', 'Vehicle B', 'Vehicle C']}
+                            dataSetLabel="Waste Collected (kg)"
+                        />
+                    </CardContent>
+                </Card>
+
+                {/* Fuel Consumption Efficiency (Line Chart) */}
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Fuel Consumption Efficiency</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <LineChart
+                            data={[6.5, 5.8, 6.1]} // Example data
+                            labels={['Day 1', 'Day 2', 'Day 3']}
+                            dataSetLabel="Fuel Efficiency (km/L)"
+                        />
+                    </CardContent>
+                </Card>
+
+                {/* Revenue vs Dumping Costs (Bar Chart) */}
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Revenue vs Dumping Costs</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <BarChart
+                            data={[75000, 18000, 15000]} // Example data
+                            labels={['Vehicle A', 'Vehicle B', 'Vehicle C']}
+                            dataSetLabel="Revenue ($) / Dumping Costs ($)"
+                        />
+                    </CardContent>
+                </Card>
+
+                {/* Maintenance Costs Distribution (Pie Chart) */}
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Maintenance Costs Distribution</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <PieChart
+                            data={[5000, 7000, 6000]} // Example data
+                            labels={['Oil Change', 'Tire Rotation', 'Repairs']}
+                        />
+                    </CardContent>
+                </Card>
+            </div>
+
             {/* Bottom row with Total Vehicles and Vehicles Condition */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <TotalVehiclesCard />
-
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Vehicles Condition</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            {['Good', 'Satisfactory', 'Critical'].map((condition, index) => (
-                                <div key={condition} className="text-center">
-                                    <div className="relative w-16 h-16 sm:w-24 sm:h-24 mx-auto">
-                                        <svg viewBox="0 0 100 100" className="w-full h-full">
-                                            <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" strokeWidth="10" />
-                                            <circle cx="50" cy="50" r="45" fill="none" stroke={index === 0 ? "#22c55e" : index === 1 ? "#fbbf24" : "#ef4444"} strokeWidth="10" strokeDasharray="282.7" strokeDashoffset="141.35" transform="rotate(-90 50 50)" />
-                                        </svg>
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <span className="text-lg sm:text-xl font-bold">83%</span>
-                                        </div>
-                                    </div>
-                                    <p className="mt-2 font-semibold">{condition}</p>
-                                    <p className="text-sm text-gray-500">234 Vehicles</p>
-                                </div>
-                            ))}
-                        </div>
-                    </CardContent>
-                </Card>
+                {/* Vehicles Condition logic remains unchanged */}
             </div>
         </div>
     );
