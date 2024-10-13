@@ -12,11 +12,11 @@ import { Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
-import { licenseCostSchema } from "@/lib/validation";
+import { driverLicenseSchema } from "@/lib/validation";
 
-const VehicleLicenseRecordEntryForm = () => {
+const DriverLicenseRecordEntryForm = () => {
   const [openDialog, setOpenDialog] = useState(false);
-  const roles = ["Driver", "Janator"];
+
   const handleFormSubmit = async () => {
     // handle form submission here
     console.log(form.getValues());
@@ -27,14 +27,23 @@ const VehicleLicenseRecordEntryForm = () => {
     toast.success("Fuel purchase entry added successfully");
   };
 
-  const form = useForm<z.infer<typeof licenseCostSchema>>({
-    resolver: zodResolver(licenseCostSchema),
+  const form = useForm<z.infer<typeof driverLicenseSchema>>({
+    resolver: zodResolver(driverLicenseSchema),
     defaultValues: {
-      vin: "",
-      licenseType: "",
+      driverID: "",
+      driverName: "",
       licenseNumber: "",
+      licenseType: "",
       issuingAuthority: "",
+      licenseIssueDate: "",
+      licenseExpiryDate: "",
       licenseCost: 0,
+      renewalDate: "",
+      renewalCost: 0,
+      paymentDate: "",
+      paymentMode: "",
+      finesPenalties: 0,
+      licenseStatus: "",
       licensingLocation: "",
       notesRemarks: "",
     },
@@ -50,7 +59,7 @@ const VehicleLicenseRecordEntryForm = () => {
           size="sm"
           className="hidden sm:flex bg-green-500 hover:bg-green-400"
         >
-          <Plus className="mr-2 h-4 w-4" /> New vehicle license 
+          <Plus className="mr-2 h-4 w-4" /> New driver license
         </Button>
       </DialogTrigger>
 
@@ -72,17 +81,17 @@ const VehicleLicenseRecordEntryForm = () => {
                   <CustomFormField
                     fieldType={FormFieldType.INPUT}
                     control={form.control}
-                    name="vin"
-                    label="Vehicle Identification No."
-                    placeholder="Enter VIN"
+                    name="driverID"
+                    label="Driver ID"
+                    placeholder="Enter Driver ID"
                   />
 
                   <CustomFormField
                     fieldType={FormFieldType.INPUT}
                     control={form.control}
-                    name="licenseType"
-                    label="License Type"
-                    placeholder="Enter License Type (e.g., Commercial, Personal)"
+                    name="driverName"
+                    label="Driver Name"
+                    placeholder="Enter Driver Name"
                   />
 
                   <CustomFormField
@@ -96,9 +105,17 @@ const VehicleLicenseRecordEntryForm = () => {
                   <CustomFormField
                     fieldType={FormFieldType.INPUT}
                     control={form.control}
+                    name="licenseType"
+                    label="License Type"
+                    placeholder="Enter License Type"
+                  />
+
+                  <CustomFormField
+                    fieldType={FormFieldType.INPUT}
+                    control={form.control}
                     name="issuingAuthority"
                     label="Issuing Authority"
-                    placeholder="Enter Issuing Authority (e.g., DVLA)"
+                    placeholder="Enter Issuing Authority"
                   />
 
                   <CustomFormField
@@ -106,7 +123,6 @@ const VehicleLicenseRecordEntryForm = () => {
                     control={form.control}
                     name="licenseIssueDate"
                     label="License Issue Date"
-                    placeholder="Select License Issue Date"
                   />
 
                   <CustomFormField
@@ -114,7 +130,6 @@ const VehicleLicenseRecordEntryForm = () => {
                     control={form.control}
                     name="licenseExpiryDate"
                     label="License Expiry Date"
-                    placeholder="Select License Expiry Date"
                   />
 
                   <CustomFormField
@@ -123,6 +138,13 @@ const VehicleLicenseRecordEntryForm = () => {
                     name="licenseCost"
                     label="License Cost (GHS)"
                     placeholder="Enter License Cost"
+                  />
+
+                  <CustomFormField
+                    fieldType={FormFieldType.DATE_PICKER}
+                    control={form.control}
+                    name="renewalDate"
+                    label="Renewal Date"
                   />
 
                   <CustomFormField
@@ -138,7 +160,6 @@ const VehicleLicenseRecordEntryForm = () => {
                     control={form.control}
                     name="paymentDate"
                     label="Payment Date"
-                    placeholder="Select Payment Date"
                   />
 
                   <CustomFormField
@@ -146,7 +167,7 @@ const VehicleLicenseRecordEntryForm = () => {
                     control={form.control}
                     name="paymentMode"
                     label="Payment Mode"
-                    placeholder="Enter Payment Mode (e.g., Cash, Direct Debit)"
+                    placeholder="Enter Payment Mode"
                   />
 
                   <CustomFormField
@@ -154,7 +175,15 @@ const VehicleLicenseRecordEntryForm = () => {
                     control={form.control}
                     name="finesPenalties"
                     label="Fines/Penalties (GHS)"
-                    placeholder="Enter Fines or Penalties"
+                    placeholder="Enter Fines/Penalties"
+                  />
+
+                  <CustomFormField
+                    fieldType={FormFieldType.INPUT}
+                    control={form.control}
+                    name="licenseStatus"
+                    label="License Status"
+                    placeholder="Enter License Status"
                   />
 
                   <CustomFormField
@@ -162,7 +191,7 @@ const VehicleLicenseRecordEntryForm = () => {
                     control={form.control}
                     name="licensingLocation"
                     label="Licensing Location"
-                    placeholder="Enter Licensing Location (e.g., Accra Branch)"
+                    placeholder="Enter Licensing Location"
                   />
 
                   <CustomFormField
@@ -170,7 +199,7 @@ const VehicleLicenseRecordEntryForm = () => {
                     control={form.control}
                     name="notesRemarks"
                     label="Notes/Remarks"
-                    placeholder="Enter Notes or Remarks"
+                    placeholder="Enter Notes/Remarks"
                   />
                 </div>
 
@@ -190,4 +219,4 @@ const VehicleLicenseRecordEntryForm = () => {
   );
 };
 
-export default VehicleLicenseRecordEntryForm;
+export default DriverLicenseRecordEntryForm;
