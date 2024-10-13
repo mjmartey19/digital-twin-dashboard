@@ -82,6 +82,35 @@ export const maintenanceRecordSchema = z.object({
   notesRemarks: z.string().optional() // Optional field
 });
 
+export const insuranceSchema = z.object({
+  vin: z.string(),
+  insuranceProvider: z.string(),
+  policyNumber: z.string(),
+  insuranceType: z.string(),
+  coverageStartDate: z.string().min(1, "Start date is required").regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format (YYYY-MM-DD)"),
+  coverageEndDate: z.string().min(1, "End date is required").regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format (YYYY-MM-DD)"),
+  premiumAmount: z.number().min(0, "Amount cannot be less than zero"),
+  paymentFrequency: z.string(),
+  paymentDate: z.string().min(1, "Payment date is required").regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format (YYYY-MM-DD)"),
+  deductible: z.number().min(0, "Payment date cannot be less than zero"),
+  coverageDetails: z.string(),
+  renewalDate: z.string(),
+  notesRemarks: z.string(),
+});
+
+export const insuranceClaimsSchema = z.object({
+  insuranceID: z.string(),
+  vin: z.string(),
+  incidentDate: z.string(),
+  claimAmount: z.number(),
+  claimStatus: z.string(),
+  claimDate: z.string(),
+  insuranceProvider: z.string(),
+  driverInvolved: z.string(),
+  incidentDescription: z.string(),
+  claimResolutionDate: z.string().optional(), // Can be empty for pending claims
+  resolutionNotes: z.string().optional(),
+=======
 export const licenseCostSchema = z.object({
   vin: z.string().min(1, "VIN is required"),
   licenseType: z.string(),
