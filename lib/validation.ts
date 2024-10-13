@@ -97,3 +97,17 @@ export const insuranceSchema = z.object({
   renewalDate: z.string(),
   notesRemarks: z.string(),
 });
+
+export const insuranceClaimsSchema = z.object({
+  insuranceID: z.string(),
+  vin: z.string(),
+  incidentDate: z.string(),
+  claimAmount: z.number(),
+  claimStatus: z.string(),
+  claimDate: z.string(),
+  insuranceProvider: z.string(),
+  driverInvolved: z.string(),
+  incidentDescription: z.string(),
+  claimResolutionDate: z.string().optional(), // Can be empty for pending claims
+  resolutionNotes: z.string().optional(),
+});
