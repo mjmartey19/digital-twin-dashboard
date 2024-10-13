@@ -1,0 +1,41 @@
+import { DriverLicense } from "./TableColumn";
+
+export const driverLicenseData: DriverLicense[] = [
+    {
+      driverID: "ST12345",
+      driverName: "John Doe",
+      licenseNumber: "DL123456",
+      licenseType: "Commercial",
+      issuingAuthority: "DVLA",
+      licenseIssueDate: "2023-03-01",
+      licenseExpiryDate: "2026-03-01",
+      licenseCost: 300,
+      renewalDate: "2026-03-01",
+      renewalCost: 250,
+      paymentDate: "2023-03-01",
+      paymentMode: "Credit Card",
+      finesPenalties: 0,
+      licenseStatus: "Active",
+      licensingLocation: "Accra Branch",
+      notesRemarks: "License renewed for 3 years.",
+    },
+    {
+      driverID: "ST67890",
+      driverName: "Jane Smith",
+      licenseNumber: "DL789012",
+      licenseType: "Personal",
+      issuingAuthority: "DVLA",
+      licenseIssueDate: "2022-05-15",
+      licenseExpiryDate: "2024-05-15",
+      licenseCost: 200,
+      renewalDate: "2024-05-15",
+      renewalCost: 180,
+      paymentDate: "2022-05-15",
+      paymentMode: "Cash",
+      finesPenalties: 50,
+      licenseStatus: "Expired",
+      licensingLocation: "Kumasi Office",
+      notesRemarks: "Penalty due to late license renewal.",
+    },
+  ];
+  

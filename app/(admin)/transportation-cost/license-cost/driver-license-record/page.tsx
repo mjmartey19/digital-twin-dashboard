@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 
 import PlaceholderContent from "@/components/demo/placeholder-content";
@@ -10,8 +11,28 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
+import { useState } from "react";
+import { getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
+import { driverLicenseColumns } from "./TableColumn"
+import SearchTable from "@/components/admin-panel/SearchTable";
+import { DeleteVehicleDialog } from "@/components/delete-vehicle-dialog";
+import { DataTableViewOptions } from "@/components/admin-panel/data-table-view-options";
+import { DataTable } from "@/components/admin-panel/DataTable";
+import { driverLicenseData } from "./mockData"
+import DriverLicenseRecordEntryForm from "./DriverLicenseRecordEntryForm";
+
 
 export default function DriverLicenseCostPage() {
+
+  const [tableData, setTableData] = useState(driverLicenseData)
+  const table = useReactTable({
+    data: tableData,
+    columns: driverLicenseColumns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+  })
+
   return (
     <ContentLayout title="Driver License Cost">
       <Breadcrumb>
@@ -33,7 +54,30 @@ export default function DriverLicenseCostPage() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <PlaceholderContent />
+      {/* <page content*/}
+      <div className="w-full h-full mt-4 flex flex-col gap-3">
+        <div className="w-full flex justify-between">
+            <SearchTable
+              table={table}
+              searchBy={"vin"}
+              placeholder={"vehicle identification number"}
+            />
+
+            <div className="flex place-items-center gap-4">
+              {table.getFilteredSelectedRowModel().rows.length > 0 ? (
+                <DeleteVehicleDialog
+                  vehicles={table
+                    .getFilteredSelectedRowModel()
+                    .rows.map((row) => row.original as any)}
+                  onSuccess={() => table.toggleAllRowsSelected(false)}
+                />
+              ) : null}
+              <DriverLicenseRecordEntryForm/>
+              <DataTableViewOptions table={table} />
+            </div>
+        </div>
+        <DataTable columns={driverLicenseColumns} table={table} />
+      </div>
     </ContentLayout>
   );
 }

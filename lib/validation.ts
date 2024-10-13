@@ -81,3 +81,38 @@ export const maintenanceRecordSchema = z.object({
   nextScheduledMaintenance: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format (YYYY-MM-DD)").optional(),
   notesRemarks: z.string().optional() // Optional field
 });
+
+export const licenseCostSchema = z.object({
+  vin: z.string().min(1, "VIN is required"),
+  licenseType: z.string(),
+  licenseNumber: z.string(),
+  issuingAuthority: z.string(),
+  licenseIssueDate: z.string(), 
+  licenseExpiryDate: z.string(), 
+  licenseCost: z.number().min(0, "License cost must be a positive number"),
+  renewalCost: z.number().min(0, "Renewal cost must be a positive number"),
+  paymentDate: z.string(), 
+  paymentMode: z.string(),
+  finesPenalties: z.number().min(0, "Fines/Penalties must be a positive number"),
+  licensingLocation: z.string(),
+  notesRemarks: z.string().optional(),
+});
+
+export const driverLicenseSchema = z.object({
+  driverID: z.string().min(1, "Driver ID is required"),
+  driverName: z.string(),
+  licenseNumber: z.string(),
+  licenseType: z.string(),
+  issuingAuthority: z.string(),
+  licenseIssueDate: z.string(), // Date format as string
+  licenseExpiryDate: z.string(), // Date format as string
+  licenseCost: z.number().min(0, "License cost must be a positive number"),
+  renewalDate: z.string(), // Date format as string
+  renewalCost: z.number().min(0, "Renewal cost must be a positive number"),
+  paymentDate: z.string(), // Date format as string
+  paymentMode: z.string(),
+  finesPenalties: z.number().min(0, "Fines/Penalties must be a positive number"),
+  licenseStatus: z.string(),
+  licensingLocation: z.string(),
+  notesRemarks: z.string().optional(),
+});
