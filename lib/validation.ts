@@ -209,3 +209,43 @@ export const wasteRevenueSchema = z.object({
 });
 
 export type WasteRevenue = z.infer<typeof wasteRevenueSchema>;
+
+export const routeSchema = z.object({
+  routeId: z.string().nonempty("Route ID is required"),
+  vin: z.string().nonempty("VIN is required"),
+  startLocation: z.string().nonempty("Start Location is required"),
+  endLocation: z.string().nonempty("End Location is required"),
+  distance: z.number().positive("Distance must be a positive number"),
+  startTime: z.union([z.date(), z.string().optional()]).refine(
+    (value) => {
+      // Allow both a valid Date object and an empty string (optional)
+      if (value instanceof Date) {
+        return !isNaN(value.getTime()); // Check if the Date is valid
+      }
+      return value === ""; // Allow empty string
+    },
+    {
+      message: "Start Time must be a valid date or an empty string",
+    }
+  ),
+  endTime: z.union([z.date(), z.string().optional()]).refine(
+    (value) => {
+      if (value instanceof Date) {
+        return !isNaN(value.getTime()); // Check if the Date is valid
+      }
+      return value === ""; // Allow empty string
+    },
+    {
+      message: "End Time must be a valid date",
+    }
+  ),
+  stopsMade: z.number().nonnegative("Stops Made must be a non-negative number"),
+  routeStatus: z.enum(["Pending", "In Progress", "Completed", "Cancelled"]),
+  driverId: z.string().nonempty("Driver ID is required"),
+  fuelConsumption: z
+    .number()
+    .nonnegative("Fuel Consumption must be a non-negative number"),
+  notes: z.string().optional(), // This can be optional if notes are not always required
+});
+
+export type Route = z.infer<typeof routeSchema>;
