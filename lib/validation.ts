@@ -189,3 +189,23 @@ export const wasteDumpingFeeSchema = z.object({
 });
 
 export type WasteDumpingFee = z.infer<typeof wasteDumpingFeeSchema>;
+
+// Waste Revenue per Vehicle Schema
+export const wasteRevenueSchema = z.object({
+  vin: z.string().min(1, "VIN is required"),
+  date: z.string().min(1, "Date is required"), // Date as string, adjust based on your input format
+  totalBinsCollected: z
+    .number()
+    .min(0, "Total bins collected must be a non-negative number"),
+  wasteCollectionType: z.string().min(1, "Waste collection type is required"),
+  revenuePerBin: z
+    .number()
+    .min(0, "Revenue per bin must be a non-negative number"),
+  totalRevenue: z
+    .number()
+    .min(0, "Total revenue must be a non-negative number"),
+  driverName: z.string().min(1, "Driver name is required"),
+  collectionType: z.enum(["Regular", "On Demand"]),
+});
+
+export type WasteRevenue = z.infer<typeof wasteRevenueSchema>;
