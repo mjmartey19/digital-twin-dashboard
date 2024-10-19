@@ -168,3 +168,24 @@ export const wasteBinsCollectedSchema = z.object({
 
 // TypeScript type inference from Zod schema
 export type WasteBinsCollected = z.infer<typeof wasteBinsCollectedSchema>;
+
+export const wasteDumpingFeeSchema = z.object({
+  vin: z.string().min(1, "VIN is required"),
+  date: z.string().min(1, "Date is required"), // Change to z.date() if using a date picker that supports it.
+  wasteDumped: z
+    .number()
+    .min(1, "Waste Dumped is required")
+    .positive("Must be a positive number"),
+  dumpingFacility: z.string().min(1, "Dumping Facility is required"),
+  dumpingFeePerKg: z
+    .number()
+    .min(0.01, "Dumping Fee per kg is required")
+    .positive("Must be a positive number"),
+  totalCost: z
+    .number()
+    .min(0.01, "Total Cost is required")
+    .positive("Must be a positive number"),
+  notesRemarks: z.string().optional(),
+});
+
+export type WasteDumpingFee = z.infer<typeof wasteDumpingFeeSchema>;
